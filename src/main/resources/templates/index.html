@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${league.getName()+' '+league.getSeason()}">League Season</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <div>
+        <nav class="navbar navbar-dark bg-dark navbar-expand-lg rounded">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#" th:text="${league.getName()+' '+league.getSeason()}">League Season</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" th:classappend="${page.equals('rules')}?active" href="rules">Rules</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:classappend="${page.equals('classification')}?active"
+                               href="classification">Classification</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:classappend="${page.equals('calendar')}?active" href="calendar">Calendar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:classappend="${page.equals('bet')}?active" href="bet">Manage my
+                                Bet</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="bg-light" style="text-align: center;padding-top:2em;padding-bottom:2em;">
+            <h1 th:text="${league.getName()+' '+league.getSeason()}">League Season</h1>
+            <h2 th:text="${pageTitle}"></h2>
+            <div class="row justify-content-center">
+                <div class="col-auto" style="text-align:left;" th:insert="${page}">
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="bg-light text-center text-lg-start">
+        <div class="text-center p-3 bg-dark rounded text-light">Made with &#10084; by
+            <a class="text-light" href="https://github.com/kettoleon">kettoleon</a>.
+        </div>
+    </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+</body>
+</html>

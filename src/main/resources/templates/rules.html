@@ -1,0 +1,91 @@
+<p>1. Go to <a href="bet">Manage my Bet</a> to register and place your bet. You will be able to <strong>modify
+    your bet
+    until <span th:text="${league.getFormattedStart()}">the day before the first match</span>.</strong></p>
+<p>2. You will earn points each match according to the rules below:</p>
+<ul>
+    <li>+3 points for guessing the result (win or tie)</li>
+    <li>+1 point for guessing a team's number of goals (max +2)</li>
+    <li>+2 bonus points for guessing the exact result</li>
+</ul>
+<table class="table table-sm table-striped table-hover caption-top" style="width: 1px;">
+    <caption>Examples:</caption>
+    <thead class="table-dark" style="text-align: center;">
+    <td style="white-space: nowrap;">Bet</td>
+    <td style="white-space: nowrap;">Real</td>
+    <td style="white-space: nowrap;">Win or tie</td>
+    <td style="white-space: nowrap;">Number of goals</td>
+    <td style="white-space: nowrap;">Exact result</td>
+    <td style="white-space: nowrap;">Total</td>
+    </thead>
+    <tbody class="table-group-divider">
+    <tr>
+        <td style="white-space: nowrap;">2-1</td>
+        <td style="white-space: nowrap;">0-0</td>
+        <td style="white-space: nowrap;">+0</td>
+        <td style="white-space: nowrap;">+0</td>
+        <td style="white-space: nowrap;">+0</td>
+        <td style="white-space: nowrap;">0 Pts.</td>
+    </tr>
+    <tr>
+        <td style="white-space: nowrap;">3-1</td>
+        <td style="white-space: nowrap;">0-1</td>
+        <td style="white-space: nowrap;">+0</td>
+        <td style="white-space: nowrap;">+1</td>
+        <td style="white-space: nowrap;">+0</td>
+        <td style="white-space: nowrap;">1 Pts.</td>
+    </tr>
+    <tr>
+        <td style="white-space: nowrap;">3-1</td>
+        <td style="white-space: nowrap;">1-0</td>
+        <td style="white-space: nowrap;">+3</td>
+        <td style="white-space: nowrap;">+0</td>
+        <td style="white-space: nowrap;">+0</td>
+        <td style="white-space: nowrap;">3 Pts.</td>
+    </tr>
+    <tr>
+        <td style="white-space: nowrap;">3-0</td>
+        <td style="white-space: nowrap;">2-0</td>
+        <td style="white-space: nowrap;">+3</td>
+        <td style="white-space: nowrap;">+1</td>
+        <td style="white-space: nowrap;">+0</td>
+        <td style="white-space: nowrap;">4 Pts.</td>
+    </tr>
+    <tr>
+        <td style="white-space: nowrap;">3-1</td>
+        <td style="white-space: nowrap;">3-1</td>
+        <td style="white-space: nowrap;">+3</td>
+        <td style="white-space: nowrap;">+2</td>
+        <td style="white-space: nowrap;">+2</td>
+        <td style="white-space: nowrap;">7 Pts.</td>
+    </tr>
+    </tbody>
+</table>
+<p>3. The bet is 10€ or 10£ or 10$ (Choose your currency)</p>
+<p>4. There are awards for the three first places distributed as below:</p>
+<ul>
+    <li>70% first place, 20% second place, 10% third place.</li>
+    <li>In case of a tie, the award will be divided in equal parts.</li>
+</ul>
+<p>5. The deadline to do any change to your bet and pay the fees is <span
+        th:text="${league.getFormattedStart()}">the day before the first match</span>. After that time, the
+    page to set your bet will be disabled.</p>
+<p>6. Points of contact to pay your fee and clarify any doubts:</p>
+<!-- TODO List of contacts from users with flag -->
+<table class="table table-sm table-striped table-hover caption-top" style="width: 1px;">
+    <thead class="table-dark" style="text-align: center;">
+    <td style="white-space: nowrap;">Address</td>
+    <td style="white-space: nowrap;">Bizum?</td>
+    </thead>
+    <tbody class="table-group-divider">
+    </tbody>
+</table>
+<p>7. For transparency:</p>
+<ul>
+    <li>Before the start of the World Cup, all participants will receive an e-mail with everyone's bets.
+    </li>
+    <li>This system's code is available in github if anyone wants to have a look.</li>
+</ul>
+<p>8. During the World Cup, everyone will be able to <a href="classification">check the classification</a>.
+</p>
+<p>9. Thanks for participating!</p>
+<div style="text-align:center;"><a class="btn btn-primary" href="register" role="button">Register</a></div>

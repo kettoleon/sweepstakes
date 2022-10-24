@@ -1,0 +1,60 @@
+<div th:if="${!success}">
+    <div class="alert alert-danger d-flex align-items-center" role="alert"
+         th:each="error: ${errors?.getGlobalErrors()}">
+        <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:">
+            <use xlink:href="#exclamation-triangle-fill"/>
+        </svg>
+        <div th:text="${error.getDefaultMessage()}">
+            An example danger alert with an icon
+        </div>
+    </div>
+    <form th:action="@{register}" th:object="${user}" method="POST" enctype="utf8">
+        <div class="mb-3">
+            <label for="name" class="form-label">Name: (The name that will be shown in the
+                classification)</label>
+            <div class="input-group has-validation">
+                <input type="text" class="form-control" id="name" name="name"
+                       aria-describedby="nameFeedback"
+                       th:field="*{name}" th:classappend="${errors?.hasFieldErrors('name')}?is-invalid">
+                <div id="nameFeedback" class="invalid-feedback"
+                     th:each="error: ${errors?.getFieldErrors('name')}"
+                     th:text="${error.getDefaultMessage()}">Validation error
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <!-- TODO properly put the explanation below, but somehow with the feedback it breaks -->
+            <label for="email" class="form-label">Email address: (For logging in, and contacting
+                you)</label>
+            <div class="input-group has-validation">
+                <input type="text" class="form-control" id="email" name="email"
+                       aria-describedby="emailHelp emailFeedback"
+                       th:field="*{email}" th:classappend="${errors?.hasFieldErrors('email')}?is-invalid">
+                <div id="emailFeedback" class="invalid-feedback"
+                     th:each="error: ${errors?.getFieldErrors('email')}"
+                     th:text="${error.getDefaultMessage()}">Validation error
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password:</label>
+            <div class="input-group has-validation">
+                <input type="password" class="form-control" id="password" name="password"
+                       aria-describedby="passwordFeedback"
+                       th:field="*{password}"
+                       th:classappend="${errors?.hasFieldErrors('password')}?is-invalid">
+                <div id="passwordFeedback" class="invalid-feedback"
+                     th:each="error: ${errors?.getFieldErrors('password')}"
+                     th:text="${error.getDefaultMessage()}">Validation error
+                </div>
+            </div>
+        </div>
+        <input type="hidden"
+               name="${_csrf.parameterName}"
+               value="${_csrf.token}"/>
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</div>
+<div th:if="${success}">
+    <p>Account created, you can now <a href="/bet">set your bet</a>.</p>
+</div>

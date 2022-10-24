@@ -1,0 +1,21 @@
+<table class="table table-sm table-striped table-hover caption-top" style="width: 1px;">
+    <caption>All times are CET/GMT+2.</caption>
+    <thead class="table-dark" style="text-align: center;">
+    <td>Time</td>
+    <td colspan="5">Match</td>
+    </thead>
+    <tbody class="table-group-divider">
+    <tr th:each="fixture: ${league?.getFixturesByDate()}">
+        <td th:text="${fixture.getFormattedTime()}" style="text-align: left; white-space: nowrap;">Time</td>
+        <td><img th:src="${fixture.getHome().getIcon()}" width="16" height="12"/></td>
+        <td th:text="${fixture.getHome().getName()}" style="text-align: right; white-space: nowrap;">
+            HomeName
+        </td>
+        <td>-</td>
+        <td th:text="${fixture.getAway().getName()}" style="text-align: left; white-space: nowrap;">
+            AwayName
+        </td>
+        <td><img th:src="${fixture.getAway().getIcon()}" width="16" height="12"></td>
+    </tr>
+    </tbody>
+</table>
