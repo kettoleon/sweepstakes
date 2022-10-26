@@ -5,6 +5,7 @@ import com.github.kettoleon.sweepstakes.client.apifootball.model.countries.Count
 import com.github.kettoleon.sweepstakes.client.apifootball.model.fixtures.FixturesResponse;
 import com.github.kettoleon.sweepstakes.client.apifootball.model.leagues.LeagueResponse;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
@@ -26,7 +27,7 @@ public class ApiFootballClient {
     public FixturesResponse getFixtures() {
         //TODO cache, request only if not requested for 30 minutes
         try {
-            return objectMapper.readValue(new File("./fixtures.json"), FixturesResponse.class);
+            return objectMapper.readValue(ResourceUtils.getURL("classpath:fixtures.json"), FixturesResponse.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -36,7 +37,7 @@ public class ApiFootballClient {
     public CountriesResponse getCountries() {
         //TODO cache, request only if not requested for 30 minutes
         try {
-            return objectMapper.readValue(new File("./countries.json"), CountriesResponse.class);
+            return objectMapper.readValue(ResourceUtils.getURL("classpath:countries.json"), CountriesResponse.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -46,7 +47,7 @@ public class ApiFootballClient {
     public LeagueResponse getLeague() {
         //TODO cache, request only if not requested for 30 minutes
         try {
-            return objectMapper.readValue(new File("./league.json"), LeagueResponse.class);
+            return objectMapper.readValue(ResourceUtils.getURL("classpath:league.json"), LeagueResponse.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -4,6 +4,7 @@ import com.github.kettoleon.sweepstakes.league.model.ApiFootballLeagueProvider;
 import com.github.kettoleon.sweepstakes.league.model.LeagueProvider;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.ApplicationPidFileWriter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,7 +13,10 @@ import org.springframework.context.annotation.Configuration;
 public class Sweepstakes {
 
     public static void main(String[] args) {
-        SpringApplication.run(Sweepstakes.class, args);
+        SpringApplication application = new SpringApplication(Sweepstakes.class);
+        application.addListeners(new ApplicationPidFileWriter("./service.pid"));
+        application.run(args);
+
     }
 
     @Bean
