@@ -7,6 +7,7 @@ import com.github.kettoleon.sweepstakes.users.repo.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -16,7 +17,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -34,6 +37,9 @@ public class UserController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private Environment environment;
 
     @RequestMapping(value = "/login", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView loginForm() {
@@ -76,8 +82,16 @@ public class UserController {
         user.setName(formUser.getName());
         user.setEmail(formUser.getEmail());
         user.setPasswordHash(passwordEncoder.encode(formUser.getPassword()));
-        //TODO set admin or contact from properties file
+
+        if (getPropertyAdmins().contains(formUser.getEmail())) {
+            user.setAdmin(true);
+        }
+
         return user;
+    }
+
+    private List<String> getPropertyAdmins() {
+        return Arrays.stream(environment.getProperty("admins", "").split(",")).collect(Collectors.toList());
     }
 
     private void validateRegisterForm(FormUser formUser, Errors errors) {
