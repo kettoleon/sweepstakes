@@ -19,6 +19,7 @@ public class User {
     private String passwordHash;
     private boolean admin;
     private boolean contact;
+    private boolean paid;
 
 
 }

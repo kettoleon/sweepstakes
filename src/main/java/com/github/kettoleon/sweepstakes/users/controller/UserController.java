@@ -7,7 +7,7 @@ import com.github.kettoleon.sweepstakes.users.repo.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -16,7 +16,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Comparator;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @Controller
 public class UserController {
@@ -100,6 +102,19 @@ public class UserController {
 //        return page("reset");
 //    }
 
+
+    @GetMapping(value = "/users")
+    public ModelAndView adminUsers() {
+        FormAdminUsers form = new FormAdminUsers();
+        form.setUsers(userRepository.findAll().stream().sorted(Comparator.comparing(User::getEmail)).collect(Collectors.toList()));
+        return page("users", "Admin Users").addObject("form", form);
+    }
+
+    @PostMapping(value = "/users")
+    public ModelAndView adminUsers(@ModelAttribute("form") FormAdminUsers form) {
+        userRepository.saveAllAndFlush(form.getUsers());
+        return adminUsers();
+    }
 
     public ModelAndView page(String viewId, String title) {
         ModelAndView modelAndView = new ModelAndView("index");

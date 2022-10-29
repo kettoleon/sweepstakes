@@ -70,13 +70,16 @@
         th:text="${league.getFormattedStart()}">the day before the first match</span>. After that time, the
     page to set your bet will be disabled.</p>
 <p>6. Points of contact to pay your fee and clarify any doubts:</p>
-<!-- TODO List of contacts from users with flag -->
 <table class="table table-sm table-striped table-hover caption-top" style="width: 1px;">
     <thead class="table-dark" style="text-align: center;">
     <td style="white-space: nowrap;">Address</td>
-    <td style="white-space: nowrap;">Bizum?</td>
+<!-- TODO   <td style="white-space: nowrap;">Bizum?</td>-->
     </thead>
     <tbody class="table-group-divider">
+    <tr th:each="contact: ${contacts}">
+        <td><a th:href="'mailto:'+${contact.getEmail()}" th:text="${contact.getEmail()}">someone@gmail.com</a></td>
+        <!--        <td>//TODO?</td>-->
+    </tr>
     </tbody>
 </table>
 <p>7. For transparency:</p>

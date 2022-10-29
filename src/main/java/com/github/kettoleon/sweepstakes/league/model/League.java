@@ -29,4 +29,8 @@ public class League {
         return start.format(DateTimeFormatter.ofPattern("MMM dd, HH:mm"));
     }
 
+    public Fixture getFixtureById(long id) {
+        return fixtures.stream().filter(f -> f.getId() == id).findFirst().orElseThrow();
+    }
+
 }

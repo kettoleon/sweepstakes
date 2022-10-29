@@ -38,10 +38,10 @@ public class SweepstakesUserDetailsService implements UserDetailsService {
     private static List<GrantedAuthority> getAuthorities(User user) {
         List<GrantedAuthority> authorities = new ArrayList<>();
         if (user.isAdmin()) {
-            authorities.add(new SimpleGrantedAuthority("admin"));
+            authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         }
         if (user.isContact()) {
-            authorities.add(new SimpleGrantedAuthority("contact"));
+            authorities.add(new SimpleGrantedAuthority("ROLE_CONTACT"));
         }
         return authorities;
     }

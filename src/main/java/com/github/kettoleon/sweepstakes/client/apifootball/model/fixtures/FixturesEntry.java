@@ -2,14 +2,12 @@ package com.github.kettoleon.sweepstakes.client.apifootball.model.fixtures;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.github.kettoleon.sweepstakes.league.model.Team;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 
 @Data
 @NoArgsConstructor
@@ -45,6 +43,5 @@ public class FixturesEntry {
     public String getRound() {
         return league.getRound();
     }
-
 
 }

@@ -34,6 +34,10 @@
                             <a class="nav-link" th:classappend="${page.equals('bet')}?active" href="bet">Manage my
                                 Bet</a>
                         </li>
+                        <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                            <a class="nav-link" th:classappend="${page.equals('users')}?active" href="users">Manage
+                                Users</a>
+                        </li>
                     </ul>
                 </div>
             </div>

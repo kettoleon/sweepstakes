@@ -43,6 +43,7 @@ public class ApiFootballLeagueProvider implements LeagueProvider {
 
     private Fixture mapFixture(FixturesEntry ft) {
         Fixture fixture = new Fixture();
+        fixture.setId(ft.getFixture().getId());
         fixture.setTime(ft.getTime());
         fixture.setRound(ft.getRound());
         fixture.setScoreHome(ft.getHomeScore());

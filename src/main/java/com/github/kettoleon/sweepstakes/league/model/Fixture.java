@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 @NoArgsConstructor
 public class Fixture {
 
+    private long id;
     private LocalDateTime time;
     private Team home;
     private Team away;

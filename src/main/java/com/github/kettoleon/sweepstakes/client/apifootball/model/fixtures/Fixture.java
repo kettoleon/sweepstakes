@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Fixture {
 
-    int id;
+    long id;
     String timezone;
     String date;
 

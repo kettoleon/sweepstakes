@@ -16,7 +16,8 @@ public class SecurityConfiguration {
     public SecurityFilterChain customSecurityFilterChain(HttpSecurity http, SweepstakesUserDetailsService userDetailsService) throws Exception {
         http.authorizeRequests(req ->
                         req
-                                .antMatchers("/bet", "/admin").authenticated()
+                                .antMatchers("/users").hasRole("ADMIN")
+                                .antMatchers("/bet").authenticated()
                                 .anyRequest().permitAll()
                 )
                 .formLogin(login -> login

@@ -1,0 +1,40 @@
+<form action="#" th:action="@{users}" th:object="${form}" method="post">
+
+    <table class="table table-sm table-striped table-hover caption-top" style="width: 1px;">
+        <thead class="table-dark" style="text-align: center;">
+        <td>Email</td>
+        <td>Name</td>
+        <td>Paid</td>
+        <td>Contact</td>
+        <td>Admin</td>
+        </thead>
+        <tbody class="table-group-divider">
+        <tr th:each="user, itemStat: *{users}">
+            <td>
+                <input class="form-check-input" type="hidden" value=""
+                       th:field="*{users[__${itemStat.index}__].email}">
+                <input class="form-check-input" type="hidden" value=""
+                       th:field="*{users[__${itemStat.index}__].passwordHash}">
+                <span th:text="${user.getEmail()}"></span>
+            </td>
+            <td>
+                <input class="form-check-input" type="hidden" value=""
+                       th:field="*{users[__${itemStat.index}__].name}"><span th:text="${user.getName()}"></span>
+            </td>
+            <td>
+                <input class="form-check-input" type="checkbox" value=""
+                       th:field="*{users[__${itemStat.index}__].paid}"/>
+            </td>
+            <td><input class="form-check-input" type="checkbox" value=""
+                       th:field="*{users[__${itemStat.index}__].contact}"/></td>
+            <td><input class="form-check-input" type="checkbox" value=""
+                       th:field="*{users[__${itemStat.index}__].admin}"/></td>
+        </tr>
+        </tbody>
+    </table>
+    <input type="submit" id="submitButton" th:value="Save">
+
+
+</form>
+
+
