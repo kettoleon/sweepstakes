@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
 @Data
@@ -19,7 +18,6 @@ public class User {
     private String passwordHash;
     private boolean admin;
     private boolean contact;
-    private boolean paid;
-
+    private boolean enabled;
 
 }

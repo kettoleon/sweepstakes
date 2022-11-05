@@ -1,6 +1,7 @@
-<p>1. Go to <a href="bet">Manage my Bet</a> to register and place your bet. You will be able to <strong>modify
-    your bet
-    until <span th:text="${league.getFormattedStart()}">the day before the first match</span>.</strong></p>
+<p>1. Go to <a href="bet">Manage my Bet</a> to register with your workplace account and place your bet.</p>
+<p>You will be able to <strong>modify your bet until
+    <span th:text="${league.getFormattedStart()}">the day before the first match</span>.</strong></p>
+<p>After that time, the page to set your bet will be automatically disabled.</p>
 <p>2. You will earn points each match according to the rules below:</p>
 <ul>
     <li>+3 points for guessing the result (win or tie)</li>
@@ -60,36 +61,35 @@
     </tr>
     </tbody>
 </table>
-<p>3. The bet is 10€ or 10£ or 10$ (Choose your currency)</p>
+<p>3. You don't need to pay anything, the company provides the awards.</p>
 <p>4. There are awards for the three first places distributed as below:</p>
 <ul>
-    <li>70% first place, 20% second place, 10% third place.</li>
-    <li>In case of a tie, the award will be divided in equal parts.</li>
+    <li>80€ voucher first place, 50€ voucher second and third place each.</li>
+    <!-- TODO what to do in case of a tie? -->
+    <li class="danger">In case of a tie, the award will be divided in equal parts.</li>
 </ul>
-<p>5. The deadline to do any change to your bet and pay the fees is <span
-        th:text="${league.getFormattedStart()}">the day before the first match</span>. After that time, the
-    page to set your bet will be disabled.</p>
-<p>6. Points of contact to pay your fee and clarify any doubts:</p>
+<!--<p>5. The deadline to do any change to your bet and pay the fees is <span-->
+<!--        th:text="${league.getFormattedStart()}">the day before the first match</span>. After that time, the-->
+<!--    page to set your bet will be disabled.</p>-->
+<p>5. Points of contact to clarify any doubts:</p>
 <table class="table table-sm table-striped table-hover caption-top" style="width: 1px;">
     <thead class="table-dark" style="text-align: center;">
     <td style="white-space: nowrap;">Address</td>
-<!-- TODO   <td style="white-space: nowrap;">Bizum?</td>-->
     </thead>
     <tbody class="table-group-divider">
     <tr th:each="contact: ${contacts}">
         <td><a th:href="'mailto:'+${contact.getEmail()}" th:text="${contact.getEmail()}">someone@gmail.com</a></td>
-        <!--        <td>//TODO?</td>-->
     </tr>
     </tbody>
 </table>
-<p>7. For transparency:</p>
+<p>6. For transparency:</p>
 <ul>
     <li>Before the start of the World Cup, all participants will receive an e-mail with everyone's bets.</li>
     <li>This system's code is <a href="https://github.com/kettoleon/sweepstakes">available in github</a> if anyone wants
         to have a look.
     </li>
 </ul>
-<p>8. During the World Cup, everyone will be able to <a href="classification">check the classification</a>.
+<p>7. During the World Cup, everyone will be able to <a href="classification">check the classification</a>.
 </p>
-<p>9. Thanks for participating!</p>
+<p>8. Thanks for participating!</p>
 <div style="text-align:center;"><a class="btn btn-primary" href="register" role="button">Register</a></div>

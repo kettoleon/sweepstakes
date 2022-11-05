@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -86,6 +85,7 @@ public class UserController {
         if (getPropertyAdmins().contains(formUser.getEmail())) {
             user.setAdmin(true);
         }
+        user.setEnabled(true);
 
         return user;
     }
@@ -103,6 +103,23 @@ public class UserController {
             errors.rejectValue("email", "invalidEmail", "Invalid e-mail address");
         }
 
+        if (!emailFromAllowedDomains(formUser.getEmail())) {
+            errors.rejectValue("email", "invalidEmail", "E-mail address has to belong to one of the allowed domains: (" + String.join(", ", getPropertyAllowedEmailDomains()) + ")");
+        }
+
+    }
+
+    private List<String> getPropertyAllowedEmailDomains() {
+        return Arrays.stream(environment.getProperty("registration.domains.allowed", "").split(",")).collect(Collectors.toList());
+    }
+
+    private boolean emailFromAllowedDomains(String email) {
+        for (String domain : getPropertyAllowedEmailDomains()) {
+            if (email.endsWith("@" + domain)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     //TODO eventually

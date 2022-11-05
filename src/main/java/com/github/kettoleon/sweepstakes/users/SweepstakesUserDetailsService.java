@@ -31,7 +31,7 @@ public class SweepstakesUserDetailsService implements UserDetailsService {
 
     private org.springframework.security.core.userdetails.User toSpringUser(User user) {
         return new org.springframework.security.core.userdetails.User(
-                user.getEmail(), user.getPasswordHash(), true, true,
+                user.getEmail(), user.getPasswordHash(), user.isEnabled(), true,
                 true, true, getAuthorities(user));
     }
 
