@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -25,8 +26,24 @@ public class League {
         return fixtures.stream().sorted(Comparator.comparing(Fixture::getTime)).collect(Collectors.toList());
     }
 
+    public List<Fixture> getFixturesByDay(LocalDateTime day) {
+        return fixtures.stream().filter(f -> f.getTime().truncatedTo(ChronoUnit.DAYS).isEqual(day.truncatedTo(ChronoUnit.DAYS))).sorted(Comparator.comparing(Fixture::getTime)).collect(Collectors.toList());
+    }
+
+    public List<LocalDateTime> getLeagueDays() {
+        return fixtures.stream().map(f -> f.getTime().truncatedTo(ChronoUnit.DAYS)).distinct().sorted().collect(Collectors.toList());
+    }
+
+    public String formatTime(LocalDateTime time) {
+        return time.format(DateTimeFormatter.ofPattern("MMM dd, HH:mm"));
+    }
+
+    public String formatDay(LocalDateTime time) {
+        return time.format(DateTimeFormatter.ofPattern("MMM dd"));
+    }
+
     public String getFormattedStart() {
-        return start.format(DateTimeFormatter.ofPattern("MMM dd, HH:mm"));
+        return formatTime(start);
     }
 
     public Fixture getFixtureById(long id) {

@@ -10,4 +10,6 @@ public interface BetsRepository extends JpaRepositoryImplementation<FixtureBet, 
     List<FixtureBet> findAllByEmail(String email);
 
     List<FixtureBet> findAllByFixtureId(long fixtureId);
+
+    FixtureBet findByEmailAndFixtureId(String email, long fixtureId);
 }

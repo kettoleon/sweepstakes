@@ -99,6 +99,10 @@ public class UserController {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "emptyField", "Email must not be empty");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "emptyField", "Password must not be empty");
 
+        if (formUser.getName().length() > 30) {
+            errors.rejectValue("name", "tooLong", "Name cannot exceed 30 characters");
+        }
+
         if (!EMAIL_PATTERN.matcher(formUser.getEmail()).matches()) {
             errors.rejectValue("email", "invalidEmail", "Invalid e-mail address");
         }
@@ -107,6 +111,14 @@ public class UserController {
             errors.rejectValue("email", "invalidEmail", "E-mail address has to belong to one of the allowed domains: (" + String.join(", ", getPropertyAllowedEmailDomains()) + ")");
         }
 
+        userRepository.findByName(formUser.getName()).ifPresent(u -> {
+            errors.rejectValue("name", "alreadyUsed", "This name is already being used, please pick another one");
+        });
+
+        userRepository.findByEmail(formUser.getEmail()).ifPresent(u -> {
+            errors.rejectValue("email", "alreadyUsed", "This e-mail address is already registered.");
+        });
+
     }
 
     private List<String> getPropertyAllowedEmailDomains() {
@@ -114,6 +126,9 @@ public class UserController {
     }
 
     private boolean emailFromAllowedDomains(String email) {
+        if (getPropertyAllowedEmailDomains().isEmpty()) {
+            return true;
+        }
         for (String domain : getPropertyAllowedEmailDomains()) {
             if (email.endsWith("@" + domain)) {
                 return true;

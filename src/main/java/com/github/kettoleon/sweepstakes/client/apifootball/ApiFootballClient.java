@@ -26,7 +26,7 @@ public class ApiFootballClient {
     public FixturesResponse getFixtures() {
         //TODO cache, request only if not requested for 30 minutes
         try {
-            return objectMapper.readValue(ResourceUtils.getURL("classpath:fixtures.json"), FixturesResponse.class);
+            return objectMapper.readValue(ResourceUtils.getURL("classpath:fixtures.testing.json"), FixturesResponse.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

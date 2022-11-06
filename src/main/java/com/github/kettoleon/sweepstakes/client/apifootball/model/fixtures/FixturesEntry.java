@@ -20,6 +20,8 @@ public class FixturesEntry {
     private Teams teams;
     private Goals goals;
 
+    private Status status;
+
     public LocalDateTime getTime() {
         return Instant.parse(fixture.getDate()).atZone(ZoneId.of("CET")).toLocalDateTime(); //TODO configurable timezone?
     }
@@ -42,6 +44,10 @@ public class FixturesEntry {
 
     public String getRound() {
         return league.getRound();
+    }
+
+    public boolean isFinished() {
+        return status.isFinished();
     }
 
 }

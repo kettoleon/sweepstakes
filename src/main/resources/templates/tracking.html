@@ -1,0 +1,90 @@
+<p class="d-print-none">Here is a detailed view of the current leaderboard calculations. See the legend at the
+    bottom.</p>
+<div class="d-none d-print-block">
+    <p>Here is a copy of everyone's bets to keep track of. It is prepared in case someone wants to print it to keep
+        track of the points manually.</p>
+    <p>Legend:</p>
+    <ul>
+        <li>Bet: The bet the user made</li>
+        <li>NP: not placed, the user did not place a bet for this fixture</li>
+        <li>RP: result points, if user predicted the result (win or tie) (+3pts)</li>
+        <li>GP: goal points, if user predicted the goals numbers (max +2pts)</li>
+        <li>BP: bonus points, if user predicted the exact (+2pts)</li>
+        <li>DP: day points, total of points for the user that day</li>
+    </ul>
+</div>
+
+<th:block th:each="day: ${league.getLeagueDays()}">
+    <div class="pagebreak"></div>
+    <div>
+
+        <div class="row justify-content-center">
+
+            <table
+                    class="table table-sm table-striped table-hover caption-top table-bordered font-monospace"
+                    style="width: 1px; font-size:12px;"
+                    th:with="fixtures=${league?.getFixturesByDay(day)}"
+
+            >
+                <thead>
+                <tr class="text-nowrap text-center bg-dark text-light">
+                    <th colspan="18" th:text="${league.formatDay(day)}">Nov 20</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th scope="col" class="text-nowrap bg-light"
+                        style="border-left: 2px solid currentcolor;"
+                        th:each="fixture: ${fixtures}"
+                        colspan="4"
+                    >
+                        <img th:src="${fixture.getHome().getIcon()}" width="16" height="12"/>
+                        <span th:text="${fixture.getHome().getCode()+ ' - '+ fixture.getAway().getCode() }">Home - Away</span>
+                        <img th:src="${fixture.getAway().getIcon()}" width="16" height="12"/>
+                    </th>
+                    <th style="border-left: 2px solid currentcolor;"></th>
+                </tr>
+                <tr>
+                    <th class="text-nowrap" style="border-top-style: hidden;">Name</th>
+                    <th:block th:each="fixture: ${fixtures}">
+                        <th style="border-left: 2px solid currentcolor;">Bet</th>
+                        <th>RP</th>
+                        <th>GP</th>
+                        <th>BP</th>
+                    </th:block>
+                    <th style="border-top-style: hidden; border-left: 2px solid currentcolor;">DP</th>
+                </tr>
+                </thead>
+                <tbody class="table-group-divider ">
+                <tr th:each="user: ${users}">
+                    <td class="text-nowrap" th:text="${user.getName()}">UserName</td>
+                    <th:block th:each="fixture: ${fixtures}">
+                        <td style="border-left: 2px solid currentcolor;"
+                            th:text="${bets.getBet(user.getEmail(), fixture.getId())}">2-1
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </th:block>
+                    <td style="border-left: 2px solid currentcolor;"></td>
+                </tr>
+
+                </tbody>
+            </table>
+
+
+        </div>
+
+    </div>
+</th:block>
+
+<div class="d-print-none">
+    <p>Legend:</p>
+    <ul>
+        <li>Bet: The bet the user made</li>
+        <li>NP: not placed, the user did not place a bet for this fixture</li>
+        <li>RP: result points, if user predicted the result (win or tie) (+3pts)</li>
+        <li>GP: goal points, if user predicted the goals numbers (max +2pts)</li>
+        <li>BP: bonus points, if user predicted the exact (+2pts)</li>
+        <li>DP: day points, total of points for the user that day</li>
+    </ul>
+</div>

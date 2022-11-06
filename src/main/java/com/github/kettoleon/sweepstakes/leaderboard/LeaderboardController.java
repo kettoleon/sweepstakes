@@ -1,18 +1,15 @@
-package com.github.kettoleon.sweepstakes.controller;
+package com.github.kettoleon.sweepstakes.leaderboard;
 
 import com.github.kettoleon.sweepstakes.league.model.League;
 import com.github.kettoleon.sweepstakes.league.model.LeagueProvider;
-import com.github.kettoleon.sweepstakes.users.repo.User;
 import com.github.kettoleon.sweepstakes.users.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.stream.Collectors;
-
 @Controller
-public class WebController {
+public class LeaderboardController {
 
     @Autowired
     private LeagueProvider leagueProvider;
@@ -20,16 +17,11 @@ public class WebController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping(path = {"", "/", "/rules"})
-    public ModelAndView index() {
-        return page("rules", "Sweepstake Rules")
-                .addObject("contacts", userRepository.findAll().stream().filter(User::isContact).collect(Collectors.toList()));
+    @GetMapping("/leaderboard")
+    public ModelAndView leaderboard() {
+        return page("leaderboard", "Leaderboard");
     }
 
-    @GetMapping("/calendar")
-    public ModelAndView calendar() {
-        return page("calendar", "Fixtures Calendar");
-    }
 
     public ModelAndView page(String viewId, String title) {
         ModelAndView modelAndView = new ModelAndView("index");
