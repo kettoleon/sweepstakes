@@ -1,82 +1,151 @@
-<p class="d-print-none">Here is a detailed view of the current leaderboard calculations. See the legend at the
-    bottom.</p>
-<div class="d-none d-print-block">
-    <p>Here is a copy of everyone's bets to keep track of. It is prepared in case someone wants to print it to keep
-        track of the points manually.</p>
-    <p>Legend:</p>
-    <ul>
-        <li>Bet: The bet the user made</li>
-        <li>NP: not placed, the user did not place a bet for this fixture</li>
-        <li>RP: result points, if user predicted the result (win or tie) (+3pts)</li>
-        <li>GP: goal points, if user predicted the goals numbers (max +2pts)</li>
-        <li>BP: bonus points, if user predicted the exact (+2pts)</li>
-        <li>TP: total points, total of points of the user for that group of fixtures</li>
-    </ul>
+<div class="row">
+    <p class="d-print-none">Here is a detailed view of the current leaderboard calculations. See the legend at the
+        bottom. Points only sum towards the total if the match is finished.</p>
+    <div class="d-none d-print-block">
+        <p>Here is a copy of everyone's bets to keep track of. It is prepared in case someone wants to print it to keep
+            track of the points manually.</p>
+        <p>Legend:</p>
+        <ul>
+            <li>Bet: The bet the user made</li>
+            <li>NP: not placed, the user did not place a bet for this fixture</li>
+            <li>RP: result points, if user predicted the result (win or tie) (+3pts)</li>
+            <li>GP: goal points, if user predicted the goals numbers (max +2pts)</li>
+            <li>BP: bonus points, if user predicted the exact (+2pts)</li>
+            <li>TP: total points, total of points of the user for that group of fixtures</li>
+        </ul>
+    </div>
 </div>
 
 <th:block th:each="group: ${leaderboard.getDetailedLeaderboardGroups()}">
-    <div class="pagebreak"></div>
-    <div>
+    <div class="row pagebreak"></div>
+    <div class="row justify-content-center">
+        <table
+                class="table table-sm table-striped table-hover caption-top table-bordered font-monospace"
+                style="width: 1px; font-size:12px;"
+                th:with="fixtures=${group.getFixtures()}"
+        >
+            <thead>
+            <tr class="text-nowrap text-center bg-dark text-light">
+                <th colspan="18" th:text="${group.getName()}">Nov 20</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th scope="col" class="text-nowrap bg-light"
+                    style="border-left: 2px solid currentcolor; text-align: center;"
+                    th:each="fixture: ${fixtures}"
+                    colspan="4"
+                >
+                    <img th:src="${fixture.getHome().getIcon()}" width="16" height="12"/>
+                    <span th:text="${fixture.getHome().getCode()+ ' - '+ fixture.getAway().getCode() }">Home - Away</span>
+                    <img th:src="${fixture.getAway().getIcon()}" width="16" height="12"/>
+                </th>
+                <th style="border-left: 2px solid currentcolor;"></th>
+            </tr>
+            <tr>
+                <th style="border-top-style: hidden;"></th>
+                <th scope="col" class="text-nowrap"
+                    style="border-left: 2px solid currentcolor; text-align: center;"
+                    th:each="fixture: ${fixtures}"
+                    colspan="4"
+                >
 
-        <div class="row justify-content-center">
+                    <div th:if="${fixture.isStartedOrFinished()}">
+                        <span>&#9917;</span>
+                        <span th:text="${leaderboard.getFixtureResult(fixture)}"></span>
+                        <span th:if="${fixture.isFinished()}">&check;</span>
+                        <span th:if="${fixture.isStarted()}">
+                                <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                  <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </span>
+                    </div>
+                    <div class="d-print-none" th:if="${!fixture.isStartedOrFinished()}">-</div>
 
-            <table
-                    class="table table-sm table-striped table-hover caption-top table-bordered font-monospace"
-                    style="width: 1px; font-size:12px;"
-                    th:with="fixtures=${group.getFixtures()}"
-            >
-                <thead>
-                <tr class="text-nowrap text-center bg-dark text-light">
-                    <th colspan="18" th:text="${group.getName()}">Nov 20</th>
-                </tr>
-                <tr>
-                    <th></th>
-                    <th scope="col" class="text-nowrap bg-light"
-                        style="border-left: 2px solid currentcolor;"
-                        th:each="fixture: ${fixtures}"
-                        colspan="4"
-                    >
-                        <img th:src="${fixture.getHome().getIcon()}" width="16" height="12"/>
-                        <span th:text="${fixture.getHome().getCode()+ ' - '+ fixture.getAway().getCode() }">Home - Away</span>
-                        <img th:src="${fixture.getAway().getIcon()}" width="16" height="12"/>
-                    </th>
-                    <th style="border-left: 2px solid currentcolor;"></th>
-                </tr>
-                <tr>
-                    <th class="text-nowrap" style="border-top-style: hidden;">Name</th>
-                    <th:block th:each="fixture: ${fixtures}">
-                        <th style="border-left: 2px solid currentcolor;">Bet</th>
-                        <th>RP</th>
-                        <th>GP</th>
-                        <th>BP</th>
+                </th>
+                <th style="border-top-style: hidden; border-left: 2px solid currentcolor;"></th>
+            </tr>
+            <tr>
+                <th class="text-nowrap" style="border-top-style: hidden;">Name</th>
+                <th:block th:each="fixture: ${fixtures}">
+                    <th style="border-left: 2px solid currentcolor;">Bet</th>
+                    <th>RP</th>
+                    <th>GP</th>
+                    <th>BP</th>
+                </th:block>
+                <th style="border-top-style: hidden; border-left: 2px solid currentcolor;">TP</th>
+            </tr>
+            </thead>
+            <tbody class="table-group-divider ">
+            <tr th:each="user: ${leaderboard.getParticipatingUsers()}">
+                <td class="text-nowrap" th:text="${user.getName()}">UserName</td>
+                <th:block th:each="fixture: ${fixtures}"
+                          th:with="betinfo=${leaderboard.getBetInfo(user.getEmail(), fixture.getId())}">
+                    <td style="border-left: 2px solid currentcolor;"
+                        th:text="${betinfo.getBet()}">2-1
+                    </td>
+                    <th:block th:if="${fixture.isFinished()}">
+                        <td th:text="${'+'+betinfo.getResultPoints()}"></td>
+                        <td th:text="${'+'+betinfo.getGoalPoints()}"></td>
+                        <td th:text="${'+'+betinfo.getBonusPoints()}"></td>
                     </th:block>
-                    <th style="border-top-style: hidden; border-left: 2px solid currentcolor;">TP</th>
-                </tr>
-                </thead>
-                <tbody class="table-group-divider ">
-                <tr th:each="user: ${leaderboard.getParticipatingUsers()}">
-                    <td class="text-nowrap" th:text="${user.getName()}">UserName</td>
-                    <th:block th:each="fixture: ${fixtures}">
-                        <td style="border-left: 2px solid currentcolor;"
-                            th:text="${leaderboard.getBet(user.getEmail(), fixture.getId())}">2-1
-                        </td>
+                    <th:block th:if="${fixture.isStarted()}">
+                        <td class="text-secondary" th:text="${'+'+betinfo.getResultPoints()}"></td>
+                        <td class="text-secondary" th:text="${'+'+betinfo.getGoalPoints()}"></td>
+                        <td class="text-secondary" th:text="${'+'+betinfo.getBonusPoints()}"></td>
+                    </th:block>
+                    <th:block th:if="${!fixture.isStartedOrFinished()}">
                         <td></td>
                         <td></td>
                         <td></td>
                     </th:block>
-                    <td style="border-left: 2px solid currentcolor;"></td>
-                </tr>
+                </th:block>
+                <td style="border-left: 2px solid currentcolor;">
+                        <span th:if="${group.isAnyFixtureStartedOrFinished()}"
+                              th:text="'+'+${leaderboard.getUserTotalPoints(user, group)}">+0</span>
+                </td>
+            </tr>
 
-                </tbody>
-            </table>
-
-
-        </div>
-
+            </tbody>
+        </table>
     </div>
 </th:block>
 
-<div class="d-print-none">
+<div class="row pagebreak"></div>
+<div class="row justify-content-center">
+    <table
+            class="table table-sm table-striped table-hover caption-top table-bordered font-monospace"
+            style="width: 1px; font-size:12px;"
+            th:with="groups=${leaderboard.getDetailedLeaderboardGroups()}"
+    >
+        <thead>
+        <tr class="text-nowrap text-center bg-dark text-light">
+            <th colspan="18">Totals</th>
+        </tr>
+        <tr>
+            <th class="text-nowrap">Name</th>
+            <th th:each="group: ${groups}" th:text="${group.getName()}">Nov 20</th>
+            <th style="border-left: 2px solid currentcolor;">TP</th>
+        </tr>
+        </thead>
+        <tbody class="table-group-divider ">
+        <tr th:each="user: ${leaderboard.getParticipatingUsers()}">
+            <td class="text-nowrap" th:text="${user.getName()}">UserName</td>
+            <td class="text-nowrap" th:each="group: ${groups}">
+                <span th:if="${group.isAnyFixtureFinished()}"
+                      th:text="'+'+${leaderboard.getUserTotalPoints(user, group)}">+0</span>
+            </td>
+            <td style="border-left: 2px solid currentcolor;">
+                        <span th:if="${leaderboard.isAnyFixtureFinished()}"
+                              th:text="${leaderboard.getUserTotalPoints(user)}">0</span>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+
+<div class="row d-print-none">
     <p>Legend:</p>
     <ul>
         <li>Bet: The bet the user made</li>

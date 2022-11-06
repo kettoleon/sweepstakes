@@ -17,9 +17,15 @@ public class Fixture {
     private int scoreHome;
     private int scoreAway;
     private String round;
+    private boolean started;
+    private boolean finished;
 
     public String getFormattedTime() {
         return time.format(DateTimeFormatter.ofPattern("MMM dd, HH:mm"));
+    }
+
+    public boolean isStartedOrFinished() {
+        return started || finished;
     }
 
 }

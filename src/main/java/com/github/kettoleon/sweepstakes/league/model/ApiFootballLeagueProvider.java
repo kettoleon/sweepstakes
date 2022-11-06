@@ -50,6 +50,8 @@ public class ApiFootballLeagueProvider implements LeagueProvider {
         fixture.setScoreAway(ft.getAwayScore());
         fixture.setHome(team(ft.getHomeTeamName()));
         fixture.setAway(team(ft.getAwayTeamName()));
+        fixture.setFinished(ft.isFinished());
+        fixture.setStarted(ft.isBeingPlayed());
         return fixture;
     }
 

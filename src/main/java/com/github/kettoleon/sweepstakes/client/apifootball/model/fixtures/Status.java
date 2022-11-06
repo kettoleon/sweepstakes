@@ -2,6 +2,7 @@ package com.github.kettoleon.sweepstakes.client.apifootball.model.fixtures;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,7 +12,10 @@ import lombok.NoArgsConstructor;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Status {
 
+    @JsonProperty("long")
     private String description;
+
+    @JsonProperty("short")
     private String code; //FT: finished, NS: Not started
 
     public boolean isBeingPlayed() {

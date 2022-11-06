@@ -27,6 +27,42 @@ public class Leaderboard {
         this.league = league;
     }
 
+    public List<LeaderboardEntry> getLeaderboardEntries() {
+        List<LeaderboardEntry> leaderboard = new ArrayList<>();
+        for (User user : getParticipatingUsers()) {
+            LeaderboardEntry entry = new LeaderboardEntry();
+            entry.setUserName(user.getName());
+            entry.setFinishedPoints(getUserTotalPoints(user));
+            entry.setProgressPoints(getUserProgressPoints(user));
+            leaderboard.add(entry);
+        }
+
+        leaderboard = leaderboard.stream().sorted(Comparator.comparingInt(LeaderboardEntry::getFinishedPoints).reversed()).collect(Collectors.toList());
+        int pos = 0;
+        int points = Integer.MAX_VALUE;
+        for (LeaderboardEntry entry : leaderboard) {
+            if (points > entry.getFinishedPoints()) {
+                pos++;
+            }
+            entry.setFinishedPosition(pos);
+            points = entry.getFinishedPoints();
+        }
+
+        leaderboard = leaderboard.stream().sorted(Comparator.comparingInt(LeaderboardEntry::getProgressPoints).reversed()).collect(Collectors.toList());
+        pos = 0;
+        points = Integer.MAX_VALUE;
+        for (LeaderboardEntry entry : leaderboard) {
+            if (points > entry.getProgressPoints()) {
+                pos++;
+            }
+            entry.setProgressPosition(pos);
+            points = entry.getProgressPoints();
+        }
+
+        return leaderboard;
+    }
+
+
     public List<DetailedLeaderboardGroup> getDetailedLeaderboardGroups() {
         List<DetailedLeaderboardGroup> groups = new ArrayList<>();
 
@@ -52,10 +88,47 @@ public class Leaderboard {
         return userRepository.findAll().stream().filter(User::isEnabled).sorted(Comparator.comparing(User::getEmail)).collect(Collectors.toList());
     }
 
-    public String getBet(String email, long fixtureId) {
-        FixtureBet bet = betsRepository.findByEmailAndFixtureId(email, fixtureId);
-        if (bet == null) return "NP";
-        return bet.getHome() + "-" + bet.getAway();
+    public LeaderboardBet getBetInfo(String email, long fixtureId) {
+
+        return new LeaderboardBet(league.getFixtureById(fixtureId), betsRepository.findByEmailAndFixtureId(email, fixtureId));
+
+    }
+
+    public String getFixtureResult(Fixture fixture) {
+        if (fixture.isStartedOrFinished()) {
+            return fixture.getScoreHome() + " - " + fixture.getScoreAway();
+        }
+        return "-";
+    }
+
+    public int getUserTotalPoints(User user, DetailedLeaderboardGroup group) {
+        return group.getFixtures().stream().filter(Fixture::isFinished).mapToInt(f -> getBetInfo(user.getEmail(), f.getId()).getTotalPoints()).sum();
+    }
+
+    public int getUserTotalPoints(User user) {
+        return league.getFixtures().stream().filter(Fixture::isFinished).mapToInt(f -> getBetInfo(user.getEmail(), f.getId()).getTotalPoints()).sum();
+    }
+
+    private int getUserProgressPoints(User user) {
+        return league.getFixtures().stream().filter(Fixture::isStartedOrFinished).mapToInt(f -> getBetInfo(user.getEmail(), f.getId()).getTotalPoints()).sum();
+    }
+
+    public boolean isAnyFixtureFinished() {
+        for (Fixture fixture : league.getFixtures()) {
+            if (fixture.isFinished()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isAnyFixtureStarted() {
+        for (Fixture fixture : league.getFixtures()) {
+            if (fixture.isStarted()) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

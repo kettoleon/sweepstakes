@@ -28,8 +28,7 @@ public class LeaderboardController {
 
     @GetMapping("/tracking")
     public ModelAndView allBets() {
-        return page("tracking", "Leaderboard tracking")
-                .addObject("leaderboard", new Leaderboard(userRepository, betsRepository, leagueProvider.getLeague()));
+        return page("tracking", "Leaderboard tracking");
     }
 
     public ModelAndView page(String viewId, String title) {
@@ -38,6 +37,7 @@ public class LeaderboardController {
         modelAndView.addObject("pageTitle", title);
         League league = leagueProvider.getLeague();
         modelAndView.addObject("league", league);
+        modelAndView.addObject("leaderboard", new Leaderboard(userRepository, betsRepository, leagueProvider.getLeague()));
         return modelAndView;
     }
 

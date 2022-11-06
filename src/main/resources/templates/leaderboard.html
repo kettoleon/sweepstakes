@@ -1,1 +1,36 @@
 <p>Want a more <a href="tracking">detailed view</a>?</p>
+
+<table
+        class="table table-sm table-hover caption-top"
+        th:classappend="${leaderboard.isAnyFixtureStarted()?'':'table-striped'}"
+        style="width: 1px;"
+>
+    <thead>
+    <tr>
+        <th>Position</th>
+        <th class="text-nowrap">Name</th>
+        <th class="text-nowrap">Points</th>
+    </tr>
+    </thead>
+    <tbody class="table-group-divider">
+
+    <tr th:if="${leaderboard.isAnyFixtureStarted()}" th:each="entry: ${leaderboard.getLeaderboardEntries()}"
+        class="bg-gradient"
+        th:classappend="${entry.positionDelta() > 0 ? 'text-dark text-bg-success bg-opacity-50' : (entry.positionDelta() < 0 ? 'text-dark text-bg-warning bg-opacity-50':'text-dark text-bg-info bg-opacity-50')}"
+    >
+        <td class="text-nowrap" th:text="${entry.getPosition()}">1</td>
+        <td class="text-nowrap" th:text="${entry.getUserName()}">UserName</td>
+        <td class="text-nowrap" th:text="${entry.getPoints()}">0</td>
+    </tr>
+
+    <tr th:if="${!leaderboard.isAnyFixtureStarted()}" th:each="entry: ${leaderboard.getLeaderboardEntries()}"
+        class="bg-gradient"
+        th:style="${((entry.getFinishedPosition() == 1)?'background-color:gold;':(entry.getFinishedPosition() > 1 && entry.getFinishedPosition() < 4)?'background-color:silver;':'')}"
+    >
+        <td class="text-nowrap" th:text="${entry.getPosition()}">1</td>
+        <td class="text-nowrap" th:text="${entry.getUserName()}">UserName</td>
+        <td class="text-nowrap" th:text="${entry.getPoints()}">0</td>
+    </tr>
+
+    </tbody>
+</table>

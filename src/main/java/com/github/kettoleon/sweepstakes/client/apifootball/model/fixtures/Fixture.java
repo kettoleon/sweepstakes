@@ -15,4 +15,6 @@ public class Fixture {
     String timezone;
     String date;
 
+    Status status;
+
 }
