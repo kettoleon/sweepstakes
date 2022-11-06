@@ -27,21 +27,11 @@ public class BetController {
     @Autowired
     private BetsRepository betsRepository;
 
-    @Autowired
-    private UserRepository userRepository;
-
-
     @GetMapping("/bet")
     public ModelAndView manageBetsForm(Authentication auth) {
         return manageBetsPage(auth, null);
     }
 
-    @GetMapping("/tracking")
-    public ModelAndView allBets() {
-        return page("tracking", "Leaderboard tracking")
-                .addObject("users", userRepository.findAll())
-                .addObject("bets", new BetsWrapper(betsRepository));
-    }
 
     private ModelAndView manageBetsPage(Authentication auth, Errors errors) {
         BetsForm form = new BetsForm();

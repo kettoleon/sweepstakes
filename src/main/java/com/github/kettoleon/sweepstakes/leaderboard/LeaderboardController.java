@@ -1,5 +1,6 @@
 package com.github.kettoleon.sweepstakes.leaderboard;
 
+import com.github.kettoleon.sweepstakes.bet.repo.BetsRepository;
 import com.github.kettoleon.sweepstakes.league.model.League;
 import com.github.kettoleon.sweepstakes.league.model.LeagueProvider;
 import com.github.kettoleon.sweepstakes.users.repo.UserRepository;
@@ -17,11 +18,19 @@ public class LeaderboardController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private BetsRepository betsRepository;
+
     @GetMapping("/leaderboard")
     public ModelAndView leaderboard() {
         return page("leaderboard", "Leaderboard");
     }
 
+    @GetMapping("/tracking")
+    public ModelAndView allBets() {
+        return page("tracking", "Leaderboard tracking")
+                .addObject("leaderboard", new Leaderboard(userRepository, betsRepository, leagueProvider.getLeague()));
+    }
 
     public ModelAndView page(String viewId, String title) {
         ModelAndView modelAndView = new ModelAndView("index");

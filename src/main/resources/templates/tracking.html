@@ -10,11 +10,11 @@
         <li>RP: result points, if user predicted the result (win or tie) (+3pts)</li>
         <li>GP: goal points, if user predicted the goals numbers (max +2pts)</li>
         <li>BP: bonus points, if user predicted the exact (+2pts)</li>
-        <li>DP: day points, total of points for the user that day</li>
+        <li>TP: total points, total of points of the user for that group of fixtures</li>
     </ul>
 </div>
 
-<th:block th:each="day: ${league.getLeagueDays()}">
+<th:block th:each="group: ${leaderboard.getDetailedLeaderboardGroups()}">
     <div class="pagebreak"></div>
     <div>
 
@@ -23,12 +23,11 @@
             <table
                     class="table table-sm table-striped table-hover caption-top table-bordered font-monospace"
                     style="width: 1px; font-size:12px;"
-                    th:with="fixtures=${league?.getFixturesByDay(day)}"
-
+                    th:with="fixtures=${group.getFixtures()}"
             >
                 <thead>
                 <tr class="text-nowrap text-center bg-dark text-light">
-                    <th colspan="18" th:text="${league.formatDay(day)}">Nov 20</th>
+                    <th colspan="18" th:text="${group.getName()}">Nov 20</th>
                 </tr>
                 <tr>
                     <th></th>
@@ -51,15 +50,15 @@
                         <th>GP</th>
                         <th>BP</th>
                     </th:block>
-                    <th style="border-top-style: hidden; border-left: 2px solid currentcolor;">DP</th>
+                    <th style="border-top-style: hidden; border-left: 2px solid currentcolor;">TP</th>
                 </tr>
                 </thead>
                 <tbody class="table-group-divider ">
-                <tr th:each="user: ${users}">
+                <tr th:each="user: ${leaderboard.getParticipatingUsers()}">
                     <td class="text-nowrap" th:text="${user.getName()}">UserName</td>
                     <th:block th:each="fixture: ${fixtures}">
                         <td style="border-left: 2px solid currentcolor;"
-                            th:text="${bets.getBet(user.getEmail(), fixture.getId())}">2-1
+                            th:text="${leaderboard.getBet(user.getEmail(), fixture.getId())}">2-1
                         </td>
                         <td></td>
                         <td></td>
@@ -85,6 +84,6 @@
         <li>RP: result points, if user predicted the result (win or tie) (+3pts)</li>
         <li>GP: goal points, if user predicted the goals numbers (max +2pts)</li>
         <li>BP: bonus points, if user predicted the exact (+2pts)</li>
-        <li>DP: day points, total of points for the user that day</li>
+        <li>TP: total points, total of points of the user for that group of fixtures</li>
     </ul>
 </div>
