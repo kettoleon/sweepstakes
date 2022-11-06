@@ -1,6 +1,7 @@
 package com.github.kettoleon.sweepstakes.configuration;
 
 import com.github.javafaker.Faker;
+import com.github.javafaker.Name;
 import com.github.kettoleon.sweepstakes.bet.repo.BetsRepository;
 import com.github.kettoleon.sweepstakes.bet.repo.FixtureBet;
 import com.github.kettoleon.sweepstakes.league.model.Fixture;
@@ -39,9 +40,11 @@ public class LocalDevelopmentConfiguration {
     @Autowired
     private LeagueProvider leagueProvider;
 
+    private Random r = new Random();
+
     @EventListener(ApplicationReadyEvent.class)
     public void addRandomUsersAndBetsIfNeeded() {
-        Random r = new Random();
+
         if (userRepository.findAll().isEmpty()) {
             List<User> users = new ArrayList<>();
             for (int i = 0; i < 50; i++) {
@@ -78,10 +81,11 @@ public class LocalDevelopmentConfiguration {
     }
 
     private User createUser(int id) {
-        Faker faker = new Faker();
         User user = new User();
-        user.setName(faker.name().fullName());
-        user.setEmail(faker.name().username() + "@gmail.com");
+        Name name = new Faker().name();
+        String fullName = name.firstName() + " " + name.lastName();
+        user.setName((r.nextBoolean() ? name.prefix() + " " : "") + fullName);
+        user.setEmail(fullName.toLowerCase().replace(' ', '.') + "@gmail.com");
         user.setPasswordHash(passwordEncoder.encode("pass"));
         user.setEnabled(true);
         if (id == 0) {
