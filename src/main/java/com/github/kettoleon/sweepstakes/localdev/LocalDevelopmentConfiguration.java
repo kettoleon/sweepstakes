@@ -1,11 +1,13 @@
-package com.github.kettoleon.sweepstakes.configuration;
+package com.github.kettoleon.sweepstakes.localdev;
 
 import com.github.javafaker.Faker;
 import com.github.javafaker.Name;
 import com.github.kettoleon.sweepstakes.bet.repo.BetsRepository;
 import com.github.kettoleon.sweepstakes.bet.repo.FixtureBet;
+import com.github.kettoleon.sweepstakes.client.apifootball.ApiFootballClient;
+import com.github.kettoleon.sweepstakes.league.ApiFootballLeagueProvider;
 import com.github.kettoleon.sweepstakes.league.model.Fixture;
-import com.github.kettoleon.sweepstakes.league.model.LeagueProvider;
+import com.github.kettoleon.sweepstakes.league.LeagueProvider;
 import com.github.kettoleon.sweepstakes.users.repo.User;
 import com.github.kettoleon.sweepstakes.users.repo.UserRepository;
 import org.slf4j.Logger;
@@ -13,7 +15,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -41,6 +45,12 @@ public class LocalDevelopmentConfiguration {
     private LeagueProvider leagueProvider;
 
     private Random r = new Random();
+
+    @Bean
+    @Primary
+    public MockedLeagueProvider mockedLeagueProvider() {
+        return new MockedLeagueProvider("before", new ApiFootballClient(1, 2022));
+    }
 
     @EventListener(ApplicationReadyEvent.class)
     public void addRandomUsersAndBetsIfNeeded() {

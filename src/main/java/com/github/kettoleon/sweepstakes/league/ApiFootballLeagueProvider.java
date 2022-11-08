@@ -1,9 +1,12 @@
-package com.github.kettoleon.sweepstakes.league.model;
+package com.github.kettoleon.sweepstakes.league;
 
 import com.github.kettoleon.sweepstakes.client.apifootball.ApiFootballClient;
 import com.github.kettoleon.sweepstakes.client.apifootball.model.countries.Country;
 import com.github.kettoleon.sweepstakes.client.apifootball.model.fixtures.FixturesEntry;
 import com.github.kettoleon.sweepstakes.client.apifootball.model.leagues.LeagueResponse;
+import com.github.kettoleon.sweepstakes.league.model.Fixture;
+import com.github.kettoleon.sweepstakes.league.model.League;
+import com.github.kettoleon.sweepstakes.league.model.Team;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -13,8 +16,8 @@ public class ApiFootballLeagueProvider implements LeagueProvider {
 
     private final ApiFootballClient client;
 
-    public ApiFootballLeagueProvider(int leagueId, int seasonId) {
-        client = new ApiFootballClient(leagueId, seasonId);
+    public ApiFootballLeagueProvider(ApiFootballClient client) {
+        this.client = client;
     }
 
     @Override

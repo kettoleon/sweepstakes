@@ -1,7 +1,7 @@
 package com.github.kettoleon.sweepstakes.users.controller;
 
 import com.github.kettoleon.sweepstakes.league.model.League;
-import com.github.kettoleon.sweepstakes.league.model.LeagueProvider;
+import com.github.kettoleon.sweepstakes.league.LeagueProvider;
 import com.github.kettoleon.sweepstakes.users.repo.User;
 import com.github.kettoleon.sweepstakes.users.repo.UserRepository;
 import org.slf4j.Logger;
