@@ -23,8 +23,8 @@ public class AfterFirstMatch implements Scenario {
                 fixture.setFinished(false);
 
                 if (fixture.getTime().truncatedTo(ChronoUnit.DAYS).equals(LocalDateTime.now().truncatedTo(ChronoUnit.DAYS))) {
-                    fixture.setTime(LocalDateTime.now().minusHours(1).truncatedTo(ChronoUnit.HOURS));
-                    fixture.setStarted(true);
+                    fixture.setTime(LocalDateTime.now().minusHours(3).truncatedTo(ChronoUnit.HOURS));
+                    fixture.setStarted(false);
                     fixture.setFinished(true);
                     fixture.setScoreHome(3);
                     fixture.setScoreAway(2);

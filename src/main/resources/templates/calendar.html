@@ -7,15 +7,17 @@
     <tbody class="table-group-divider">
     <tr th:each="fixture: ${league?.getFixturesByDate()}">
         <td th:text="${fixture.getFormattedTime()}" style="text-align: left; white-space: nowrap;">Time</td>
-        <td><img th:src="${fixture.getHome().getIcon()}" width="16" height="12"/></td>
-        <td th:text="${fixture.getHome().getName()}" style="text-align: right; white-space: nowrap;">
-            HomeName
+        <td><img th:src="${'/'+fixture.getHome().getIcon()}" width="16" height="12"/></td>
+        <td style="text-align: right; white-space: nowrap;">
+            <span th:text="${fixture.getHome().getName()}">HomeName</span>
+            <span th:if="${fixture.isStartedOrFinished()}" th:text="${fixture.getScoreHome()}"></span>
         </td>
         <td>-</td>
-        <td th:text="${fixture.getAway().getName()}" style="text-align: left; white-space: nowrap;">
-            AwayName
+        <td style="text-align: left; white-space: nowrap;">
+            <span th:if="${fixture.isStartedOrFinished()}" th:text="${fixture.getScoreAway()}"></span>
+            <span th:text="${fixture.getAway().getName()}">AwayName</span>
         </td>
-        <td><img th:src="${fixture.getAway().getIcon()}" width="16" height="12"></td>
+        <td><img th:src="${'/'+fixture.getAway().getIcon()}" width="16" height="12"></td>
     </tr>
     </tbody>
 </table>

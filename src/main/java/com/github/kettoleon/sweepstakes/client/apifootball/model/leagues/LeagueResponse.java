@@ -38,7 +38,7 @@ public class LeagueResponse {
     }
 
     public LocalDateTime getSeasonEnd() {
-        return LocalDate.parse(getSeason().getStart()).atStartOfDay();
+        return LocalDate.parse(getSeason().getEnd()).atStartOfDay();
     }
 
     private League getLeague() {

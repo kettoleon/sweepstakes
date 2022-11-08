@@ -16,10 +16,15 @@ public class LocalDevController {
     @Autowired
     private MockedLeagueProvider leagueProvider;
 
-    @GetMapping("/localdev/{mode}")
-    public ModelAndView devmode(@PathVariable("mode") String mode) {
+    @GetMapping("/localdev")
+    public ModelAndView localdev() {
+        return page("localdev", "Local Development Tools");
+    }
+
+    @GetMapping("/localdev/{scenario}")
+    public ModelAndView setScenario(@PathVariable("scenario") String mode) {
         leagueProvider.setScenarioName(mode);
-        return page("rules", "Sweepstake Rules");
+        return page("localdev", "Local Development Tools");
     }
 
     public ModelAndView page(String viewId, String title) {
