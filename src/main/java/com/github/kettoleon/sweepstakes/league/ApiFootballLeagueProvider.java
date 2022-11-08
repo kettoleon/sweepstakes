@@ -33,8 +33,6 @@ public class ApiFootballLeagueProvider implements LeagueProvider {
         toLeague.setName(fromLeague.getLeagueName());
         toLeague.setSeason(fromLeague.getSeasonName());
         toLeague.setLogo(fromLeague.getLeagueLogo());
-        toLeague.setStart(fromLeague.getSeasonStart());
-        toLeague.setEnd(fromLeague.getSeasonEnd());
     }
 
     private List<Fixture> collectFixtures() {

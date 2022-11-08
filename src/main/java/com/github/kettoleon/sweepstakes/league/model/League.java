@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -18,8 +19,8 @@ public class League {
     public String name;
     public String season;
     public String logo;
-    public LocalDateTime start;
-    public LocalDateTime end;
+    //    public LocalDateTime start;
+//    public LocalDateTime end;
     public List<Fixture> fixtures = new ArrayList<>();
 
     public List<Fixture> getFixturesByDate() {
@@ -43,11 +44,33 @@ public class League {
     }
 
     public String getFormattedStart() {
-        return formatTime(start);
+        return formatTime(getStart());
     }
 
     public Fixture getFixtureById(long id) {
         return fixtures.stream().filter(f -> f.getId() == id).findFirst().orElseThrow();
+    }
+
+    public boolean isBeforeStart() {
+        return LocalDateTime.now().isBefore(getStart());
+    }
+
+    public LocalDateTime getStart() {
+        return getFixturesByDate().get(0).getTime().truncatedTo(ChronoUnit.DAYS);
+    }
+
+    public LocalDateTime getEnd() {
+        List<Fixture> fixturesByDate = getFixturesByDate();
+        return fixturesByDate.get(fixturesByDate.size() - 1).getTime().truncatedTo(ChronoUnit.DAYS);
+    }
+
+    public boolean hasFirstMatchStarted() {
+        Fixture fm = getFixturesByDate().get(0);
+        return fm.isStartedOrFinished();
+    }
+
+    public LocalDateTime getFirstMatchTime() {
+        return getFixturesByDate().get(0).getTime();
     }
 
 }
