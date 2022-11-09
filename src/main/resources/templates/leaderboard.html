@@ -1,22 +1,23 @@
-<div class="text-center" th:if="${league.isBeforeStart()}">
+<div th:if="${league.isBeforeStart()}">
     <p>The leaderboard will be enabled during the first match of the season. It will show everyone's points and
         positions as the match progresses.</p>
     <p>After the bet form is closed at <span th:text="${league.getFormattedStart()}"></span> and before the first match
-        at <span th:text="${league.formatTime(league.getFirstMatchTime())}"></span>, you will be able to print a sheet
-        with everyone's bets. (We will do it ourselves and send it to everyone by e-mail)</p>
+        at <span th:text="${league.formatTime(league.getFirstMatchTime())}"></span>, we will print a copy of
+        <a href="bets">everyone's bets</a> and send it to everyone by e-mail.</p>
     <p>In the meantime, make sure you have <a href="bet">placed your bet</a>!</p>
-    <i style="font-size: 5em;color: burlywood;" class="bi-calendar-heart"></i>
+    <div class="text-center"><i style="font-size: 5em;color: burlywood;" class="bi-calendar-heart text-center"></i>
+    </div>
 </div>
-<div class="text-center" th:if="${!league.isBeforeStart() && !league.hasFirstMatchStarted()}">
+<div th:if="${!league.isBeforeStart() && !league.hasFirstMatchStarted()}">
     <p>The leaderboard will be enabled during the first match of the season. It will show everyone's points and
         positions as the match progresses.</p>
-    <p>You can now see <a href="tracking">everyone's bets</a> and print them into a pdf, if you haven't received the
+    <p>You can now see <a href="bets">everyone's bets</a> and print them into a pdf, if you haven't received the
         e-mail.</p>
-    <p>Only remaining thing is to wait for the first match to start!</p>
-    <i style="font-size: 5em;color: burlywood;" class="bi-smartwatch"></i>
+    <p>Only remaining thing is to wait for the first match to start! Hyped already?</p>
+    <div class="text-center"><i style="font-size: 5em;color: burlywood;" class="bi-smartwatch"></i></div>
 </div>
-<div class="text-center" th:if="${league.hasFirstMatchStarted()}">
-    <p>Want a more <a href="tracking">detailed view</a>?</p>
+<div th:if="${league.hasFirstMatchStarted()}" class="row justify-content-center">
+    <p class="text-center">Want a more <a href="tracking">detailed view</a>?</p>
 
     <table
             class="table table-sm table-hover caption-top"

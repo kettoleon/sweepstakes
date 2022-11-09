@@ -1,19 +1,34 @@
-<div class="row">
-    <p class="d-print-none">Here is a detailed view of the current leaderboard calculations. See the legend at the
-        bottom. Points only sum towards the total if the match is finished.</p>
-    <div class="d-none d-print-block">
-        <p>Here is a copy of everyone's bets to keep track of. It is prepared in case someone wants to print it to keep
-            track of the points manually.</p>
-        <p>Legend:</p>
-        <ul>
-            <li>Bet: The bet the user made</li>
-            <li>NP: not placed, the user did not place a bet for this fixture</li>
-            <li>RP: result points, if user predicted the result (win or tie) (+3pts)</li>
-            <li>GP: goal points, if user predicted the goals numbers (max +2pts)</li>
-            <li>BP: bonus points, if user predicted the exact (+2pts)</li>
-            <li>TP: total points, total of points of the user for that group of fixtures</li>
-        </ul>
+<div th:if="${page.equals('bets')}" class="row">
+
+    <div th:if="${league.isBeforeStart()}">
+        <p>Here are the bets that people are placing. The form is still open so this data will be changing.</p>
     </div>
+    <div th:if="${!league.isBeforeStart()}">
+        <p>Here is a copy of everyone's bets to keep track of.</p>
+        <div class="text-center d-print-none">
+            <a class="btn btn-primary" href="register" role="button"
+               onclick="window.print();return false;">Print me!</a>
+            <p>You can print it to keep track of the points manually.</p>
+        </div>
+    </div>
+    <div th:if="${league.hasFirstMatchStarted()}" class="d-print-none">
+        <p>The League has already started, maybe you were looking for the <a href="tracking">leaderboard details</a>?
+        </p>
+    </div>
+    <p>Legend:</p>
+    <ul>
+        <li>Bet: The bet the user made</li>
+        <li>NP: not placed, the user did not place a bet for this fixture</li>
+        <li>RP: result points, if user predicted the result (win or tie) (+3pts)</li>
+        <li>GP: goal points, if user predicted the goals numbers (max +2pts)</li>
+        <li>BP: bonus points, if user predicted the exact (+2pts)</li>
+        <li>TP: total points, total of points of the user for that group of fixtures</li>
+    </ul>
+</div>
+
+<div th:if="${page.equals('tracking')}" class="row">
+    <p>Here is a detailed view of the current leaderboard calculations. See the legend at the
+        bottom. Points only sum towards the total if the match is finished.</p>
 </div>
 
 <th:block th:each="group: ${leaderboard.getDetailedLeaderboardGroups()}">
@@ -145,7 +160,7 @@
 </div>
 
 
-<div class="row d-print-none">
+<div th:if="${page.equals('tracking')}" class="row">
     <p>Legend:</p>
     <ul>
         <li>Bet: The bet the user made</li>

@@ -1,57 +1,70 @@
-<form action="#" th:action="@{bet}" th:object="${form}" method="post">
+<div th:if="${!league.isBeforeStart()}">
+    <p>Sorry, the time to register and place your bet has passed, and this train has left the station. Check your
+        progress in the <a href="leaderboard">leaderboard</a>.</p>
+</div>
+<div th:if="${league.isBeforeStart()}">
 
-    <div class="alert alert-danger d-flex align-items-center" role="alert"
-         th:if="${errors?.hasErrors()}">
-        <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:">
-            <use xlink:href="#exclamation-triangle-fill"/>
-        </svg>
-        <div>
-            There were errors setting some of your bets. Please review them and fix.
+    <form action="#" th:action="@{bet}" th:object="${form}" method="post">
+
+        <div class="row justify-content-center">
+            <div class="alert alert-danger d-flex align-items-center" role="alert"
+                 th:if="${errors?.hasErrors()}">
+                <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:">
+                    <use xlink:href="#exclamation-triangle-fill"/>
+                </svg>
+                <div>
+                    There were errors setting some of your bets. Please review them and fix.
+                </div>
+            </div>
+
+            <table class="table table-sm table-striped table-hover caption-top" style="width: 1px;">
+                <thead class="table-dark" style="text-align: center;">
+                <td colspan="7">Match</td>
+                </thead>
+                <tbody class="table-group-divider">
+                <tr th:each="bet, itemStat: *{bets}">
+                    <td><img th:src="${league.getFixtureById(bet.getFixtureId()).getHome().getIcon()}" width="16"
+                             height="12"/>
+                    </td>
+                    <td th:text="${league.getFixtureById(bet.getFixtureId()).getHome().getName()}"
+                        style="text-align: right; white-space: nowrap;">
+                        HomeName
+                    </td>
+                    <td>
+                        <input class="form-check-input" type="hidden" value=""
+                               th:field="*{bets[__${itemStat.index}__].id}">
+                        <input class="form-check-input" type="hidden" value=""
+                               th:field="*{bets[__${itemStat.index}__].email}">
+                        <input class="form-check-input" type="hidden" value=""
+                               th:field="*{bets[__${itemStat.index}__].fixtureId}">
+                        <div class="input-group has-validation">
+                            <input class="form-check-input" type="text" value=""
+                                   th:field="*{bets[__${itemStat.index}__].home}"
+                                   th:classappend="${errors?.hasFieldErrors('bets['+itemStat.index+'].home')}?is-invalid">
+                        </div>
+                    </td>
+                    <td>-</td>
+                    <td>
+                        <div class="input-group has-validation">
+                            <input class="form-check-input" type="text" value=""
+                                   th:field="*{bets[__${itemStat.index}__].away}"
+                                   th:classappend="${errors?.hasFieldErrors('bets['+itemStat.index+'].away')}?is-invalid">
+                        </div>
+                    </td>
+                    <td th:text="${league.getFixtureById(bet.getFixtureId()).getAway().getName()}"
+                        style="text-align: left; white-space: nowrap;">
+                        AwayName
+                    </td>
+                    <td><img th:src="${league.getFixtureById(bet.getFixtureId()).getAway().getIcon()}" width="16"
+                             height="12">
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+            <div class="row justify-content-center">
+                <input class="col-2 btn btn-primary" type="submit" id="submitButton" th:value="Save">
+            </div>
         </div>
-    </div>
-
-    <table class="table table-sm table-striped table-hover caption-top" style="width: 1px;">
-        <thead class="table-dark" style="text-align: center;">
-        <td colspan="7">Match</td>
-        </thead>
-        <tbody class="table-group-divider">
-        <tr th:each="bet, itemStat: *{bets}">
-            <td><img th:src="${league.getFixtureById(bet.getFixtureId()).getHome().getIcon()}" width="16" height="12"/>
-            </td>
-            <td th:text="${league.getFixtureById(bet.getFixtureId()).getHome().getName()}"
-                style="text-align: right; white-space: nowrap;">
-                HomeName
-            </td>
-            <td>
-                <input class="form-check-input" type="hidden" value=""
-                       th:field="*{bets[__${itemStat.index}__].id}">
-                <input class="form-check-input" type="hidden" value=""
-                       th:field="*{bets[__${itemStat.index}__].email}">
-                <input class="form-check-input" type="hidden" value=""
-                       th:field="*{bets[__${itemStat.index}__].fixtureId}">
-                <div class="input-group has-validation">
-                    <input class="form-check-input" type="text" value=""
-                           th:field="*{bets[__${itemStat.index}__].home}"
-                           th:classappend="${errors?.hasFieldErrors('bets['+itemStat.index+'].home')}?is-invalid">
-                </div>
-            </td>
-            <td>-</td>
-            <td>
-                <div class="input-group has-validation">
-                    <input class="form-check-input" type="text" value=""
-                           th:field="*{bets[__${itemStat.index}__].away}"
-                           th:classappend="${errors?.hasFieldErrors('bets['+itemStat.index+'].away')}?is-invalid">
-                </div>
-            </td>
-            <td th:text="${league.getFixtureById(bet.getFixtureId()).getAway().getName()}"
-                style="text-align: left; white-space: nowrap;">
-                AwayName
-            </td>
-            <td><img th:src="${league.getFixtureById(bet.getFixtureId()).getAway().getIcon()}" width="16" height="12">
-            </td>
-        </tr>
-        </tbody>
-
-    </table>
-    <input type="submit" id="submitButton" th:value="Save">
-</form>
+    </form>
+</div>

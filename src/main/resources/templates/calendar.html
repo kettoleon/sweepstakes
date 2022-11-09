@@ -1,23 +1,28 @@
-<table class="table table-sm table-striped table-hover caption-top" style="width: 1px;">
-    <caption>All times are CET/GMT+2.</caption>
-    <thead class="table-dark" style="text-align: center;">
-    <td>Time</td>
-    <td colspan="5">Match</td>
-    </thead>
-    <tbody class="table-group-divider">
-    <tr th:each="fixture: ${league?.getFixturesByDate()}">
-        <td th:text="${fixture.getFormattedTime()}" style="text-align: left; white-space: nowrap;">Time</td>
-        <td><img th:src="${'/'+fixture.getHome().getIcon()}" width="16" height="12"/></td>
-        <td style="text-align: right; white-space: nowrap;">
-            <span th:text="${fixture.getHome().getName()}">HomeName</span>
-            <span th:if="${fixture.isStartedOrFinished()}" th:text="${fixture.getScoreHome()}"></span>
-        </td>
-        <td>-</td>
-        <td style="text-align: left; white-space: nowrap;">
-            <span th:if="${fixture.isStartedOrFinished()}" th:text="${fixture.getScoreAway()}"></span>
-            <span th:text="${fixture.getAway().getName()}">AwayName</span>
-        </td>
-        <td><img th:src="${'/'+fixture.getAway().getIcon()}" width="16" height="12"></td>
-    </tr>
-    </tbody>
-</table>
+<div th:if="${!league.hasFirstMatchStarted()}">
+    <p>The Calendar will be automatically updated with the results of the matches as they are being played.</p>
+</div>
+<div class="row justify-content-center">
+    <table class="table table-sm table-striped table-hover caption-top" style="width: 1px;">
+        <caption>All times are CET/GMT+2.</caption>
+        <thead class="table-dark" style="text-align: center;">
+        <td>Time</td>
+        <td colspan="5">Match</td>
+        </thead>
+        <tbody class="table-group-divider">
+        <tr th:each="fixture: ${league?.getFixturesByDate()}">
+            <td th:text="${fixture.getFormattedTime()}" style="text-align: left; white-space: nowrap;">Time</td>
+            <td><img th:src="${'/'+fixture.getHome().getIcon()}" width="16" height="12"/></td>
+            <td style="text-align: right; white-space: nowrap;">
+                <span th:text="${fixture.getHome().getName()}">HomeName</span>
+                <span th:if="${fixture.isStartedOrFinished()}" th:text="${fixture.getScoreHome()}"></span>
+            </td>
+            <td>-</td>
+            <td style="text-align: left; white-space: nowrap;">
+                <span th:if="${fixture.isStartedOrFinished()}" th:text="${fixture.getScoreAway()}"></span>
+                <span th:text="${fixture.getAway().getName()}">AwayName</span>
+            </td>
+            <td><img th:src="${'/'+fixture.getAway().getIcon()}" width="16" height="12"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

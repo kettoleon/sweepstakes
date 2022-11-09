@@ -57,6 +57,9 @@ public class UserController {
             Errors errors
     ) {
 
+        if (!leagueProvider.getLeague().isBeforeStart()) {
+            return page("register", "Registration Form");
+        }
         try {
             validateRegisterForm(formUser, errors);
             if (!errors.hasErrors()) {

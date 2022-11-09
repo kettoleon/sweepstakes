@@ -28,7 +28,7 @@ public class WebController {
 
     @GetMapping("/calendar")
     public ModelAndView calendar() {
-        return page("calendar", "Fixtures Calendar");
+        return page("calendar", "Calendar");
     }
 
     public ModelAndView page(String viewId, String title) {

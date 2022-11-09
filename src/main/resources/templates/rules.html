@@ -65,11 +65,11 @@
 <p>4. There are awards for the three first places distributed as below:</p>
 <ul>
     <li>80€ voucher first place, 50€ voucher second and third place each.</li>
-    <li>In the unlikely case of a tie, the award will be divided in equal parts.</li>
+    <li>In case multiple participants have the same amount of points, the number of exact predictions will be used to
+        break the tie.
+    </li>
+    <li>If even after that, there is still a tie, the award will be divided in equal parts.</li>
 </ul>
-<!--<p>5. The deadline to do any change to your bet and pay the fees is <span-->
-<!--        th:text="${league.getFormattedStart()}">the day before the first match</span>. After that time, the-->
-<!--    page to set your bet will be disabled.</p>-->
 <p>5. Points of contact to clarify any doubts:</p>
 <table class="table table-sm table-striped table-hover caption-top" style="width: 1px;">
     <thead class="table-dark" style="text-align: center;">
@@ -83,12 +83,17 @@
 </table>
 <p>6. For transparency:</p>
 <ul>
-    <li>Before the start of the World Cup, all participants will receive an e-mail with everyone's bets.</li>
+    <li>Before the start of the World Cup, all participants will receive an e-mail with <a href="bets">everyone's
+        bets</a>.
+    </li>
     <li>This system's code is <a href="https://github.com/kettoleon/sweepstakes">available in github</a> if anyone wants
         to have a look.
     </li>
 </ul>
-<p>7. During the World Cup, everyone will be able to <a href="leaderboard">check the leaderboard</a>.
+<p>7. During the World Cup, everyone will be able to <a href="leaderboard">check the leaderboard</a>. Which will be
+    updated
+    during the matches to show the positions everyone is advancing or losing.
 </p>
 <p>8. Thanks for participating!</p>
-<div style="text-align:center;"><a class="btn btn-primary" href="register" role="button">Register</a></div>
+<div th:if="${league.isBeforeStart()}" style="text-align:center;"><a class="btn btn-primary" href="register"
+                                                                     role="button">Register</a></div>
