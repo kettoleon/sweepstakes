@@ -15,15 +15,43 @@
         <p>The League has already started, maybe you were looking for the <a href="tracking">leaderboard details</a>?
         </p>
     </div>
-    <p>Legend:</p>
-    <ul>
-        <li>Bet: The bet the user made</li>
-        <li>NP: not placed, the user did not place a bet for this fixture</li>
-        <li>RP: result points, if user predicted the result (win or tie) (+3pts)</li>
-        <li>GP: goal points, if user predicted the goals numbers (max +2pts)</li>
-        <li>BP: bonus points, if user predicted the exact (+2pts)</li>
-        <li>TP: total points, total of points of the user for that group of fixtures</li>
-    </ul>
+    <div class="row justify-content-center">
+        <table class="table table-sm table-striped table-hover caption-top" style="width: 1px;">
+            <caption>Legend:</caption>
+            <thead class="table-dark" style="text-align: center;">
+            <td style="white-space: nowrap;">Symbol</td>
+            <td style="white-space: nowrap;">Meaning</td>
+            </thead>
+            <tbody class="table-group-divider">
+            <tr>
+                <td style="white-space: nowrap;"><i class="bi bi-exclamation-triangle-fill text-warning"></i></td>
+                <td style="white-space: nowrap;">the user did not place a bet for this fixture</td>
+            </tr>
+            <tr>
+                <td style="white-space: nowrap;">Bet</td>
+                <td style="white-space: nowrap;">the prediction the user made</td>
+            </tr>
+            <tr>
+                <td style="white-space: nowrap;">RP</td>
+                <td style="white-space: nowrap;">result points, if user predicted the result (win or tie) (+3pts)</td>
+            </tr>
+            <tr>
+                <td style="white-space: nowrap;">GP</td>
+                <td style="white-space: nowrap;">goal points, if user predicted the goals numbers (max +2pts)</td>
+            </tr>
+            <tr>
+                <td style="white-space: nowrap;">BP</td>
+                <td style="white-space: nowrap;">bonus points, if user predicted the exact result (+2pts)</td>
+            </tr>
+            <tr>
+                <td style="white-space: nowrap;">TP</td>
+                <td style="white-space: nowrap;">total points, total of points of the user for that group of fixtures
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
 </div>
 
 <div th:if="${page.equals('tracking')}" class="row">
@@ -95,8 +123,10 @@
                 <td class="text-nowrap" th:text="${user.getName()}">UserName</td>
                 <th:block th:each="fixture: ${fixtures}"
                           th:with="betinfo=${leaderboard.getBetInfo(user.getEmail(), fixture.getId())}">
-                    <td style="border-left: 2px solid currentcolor;"
-                        th:text="${betinfo.getBet()}">2-1
+                    <td style="border-left: 2px solid currentcolor;" class="text-nowrap">
+                        <i th:if="${betinfo.getBet().equals('NP')}"
+                           class="text-warning bi bi-exclamation-triangle-fill"></i>
+                        <span th:if="${!betinfo.getBet().equals('NP')}" th:text="${betinfo.getBet()}">2-1</span>
                     </td>
                     <th:block th:if="${fixture.isFinished()}">
                         <td th:text="${'+'+betinfo.getResultPoints()}"></td>
@@ -159,15 +189,38 @@
     </table>
 </div>
 
-
-<div th:if="${page.equals('tracking')}" class="row">
-    <p>Legend:</p>
-    <ul>
-        <li>Bet: The bet the user made</li>
-        <li>NP: not placed, the user did not place a bet for this fixture</li>
-        <li>RP: result points, if user predicted the result (win or tie) (+3pts)</li>
-        <li>GP: goal points, if user predicted the goals numbers (max +2pts)</li>
-        <li>BP: bonus points, if user predicted the exact (+2pts)</li>
-        <li>TP: total points, total of points of the user for that group of fixtures</li>
-    </ul>
+<div th:if="${page.equals('tracking')}" class="row justify-content-center">
+    <table class="table table-sm table-striped table-hover caption-top" style="width: 1px;">
+        <caption>Legend:</caption>
+        <thead class="table-dark" style="text-align: center;">
+        <td style="white-space: nowrap;">Symbol</td>
+        <td style="white-space: nowrap;">Meaning</td>
+        </thead>
+        <tbody class="table-group-divider">
+        <tr>
+            <td style="white-space: nowrap;"><i class="bi bi-exclamation-triangle-fill text-warning"></i></td>
+            <td style="white-space: nowrap;">the user did not place a bet for this fixture</td>
+        </tr>
+        <tr>
+            <td style="white-space: nowrap;">Bet</td>
+            <td style="white-space: nowrap;">the prediction the user made</td>
+        </tr>
+        <tr>
+            <td style="white-space: nowrap;">RP</td>
+            <td style="white-space: nowrap;">result points, if user predicted the result (win or tie) (+3pts)</td>
+        </tr>
+        <tr>
+            <td style="white-space: nowrap;">GP</td>
+            <td style="white-space: nowrap;">goal points, if user predicted the goals numbers (max +2pts)</td>
+        </tr>
+        <tr>
+            <td style="white-space: nowrap;">BP</td>
+            <td style="white-space: nowrap;">bonus points, if user predicted the exact result (+2pts)</td>
+        </tr>
+        <tr>
+            <td style="white-space: nowrap;">TP</td>
+            <td style="white-space: nowrap;">total points, total of points of the user for that group of fixtures</td>
+        </tr>
+        </tbody>
+    </table>
 </div>

@@ -2,62 +2,68 @@
     <p>Sorry, the time to register and place your bet has passed, and this train has left the station.</p>
 </div>
 <div th:if="${league.isBeforeStart()}">
-    <div th:if="${!success}">
-        <div class="alert alert-danger d-flex align-items-center" role="alert"
-             th:each="error: ${errors?.getGlobalErrors()}">
-            <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:">
-                <use xlink:href="#exclamation-triangle-fill"/>
-            </svg>
-            <div th:text="${error.getDefaultMessage()}">
-                An example danger alert with an icon
+    <div class="row justify-content-center">
+        <div class="col-sm-5">
+            <div th:if="${!success}">
+                <div class="alert alert-danger d-flex align-items-center" role="alert"
+                     th:each="error: ${errors?.getGlobalErrors()}">
+                    <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:">
+                        <use xlink:href="#exclamation-triangle-fill"/>
+                    </svg>
+                    <div th:text="${error.getDefaultMessage()}">
+                        An example danger alert with an icon
+                    </div>
+                </div>
+                <form th:action="@{register}" th:object="${user}" method="POST" enctype="utf8" class="needs-validation"
+                      novalidate>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name:</label>
+                        <input type="text" class="form-control" id="name" name="name"
+                               aria-describedby="nameHelp"
+                               th:field="*{name}" th:classappend="${errors?.hasFieldErrors('name')}?is-invalid">
+                        <div id="nameHelp" class="form-text">The name that will be shown in the leaderboard</div>
+                        <div class="invalid-feedback"
+                             th:each="error: ${errors?.getFieldErrors('name')}"
+                             th:text="${error.getDefaultMessage()}">Validation error
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email address:</label>
+                        <input type="text" class="form-control" id="email" name="email"
+                               aria-describedby="emailHelp"
+                               th:field="*{email}" th:classappend="${errors?.hasFieldErrors('email')}?is-invalid">
+                        <div id="emailHelp" class="form-text">For logging in, please use your workplace e-mail address
+                        </div>
+                        <div class="invalid-feedback"
+                             th:each="error: ${errors?.getFieldErrors('email')}"
+                             th:text="${error.getDefaultMessage()}">Validation error
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password:</label>
+                        <input type="password" class="form-control" id="password" name="password"
+                               aria-describedby="passwordHelp"
+                               th:field="*{password}"
+                               th:classappend="${errors?.hasFieldErrors('password')}?is-invalid">
+                        <div id="passwordHelp" class="form-text">We use HTTPS, and we store it's hash safely, but still,
+                            don't
+                            reuse
+                            your usual one.
+                        </div>
+                        <div class="invalid-feedback"
+                             th:each="error: ${errors?.getFieldErrors('password')}"
+                             th:text="${error.getDefaultMessage()}">Validation error
+                        </div>
+                    </div>
+                    <input type="hidden"
+                           name="${_csrf.parameterName}"
+                           value="${_csrf.token}"/>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </form>
+            </div>
+            <div th:if="${success}">
+                <p>Account created, you can now <a href="/bet">set your bet</a>.</p>
             </div>
         </div>
-        <form th:action="@{register}" th:object="${user}" method="POST" enctype="utf8" class="needs-validation"
-              novalidate>
-            <div class="mb-3">
-                <label for="name" class="form-label">Name:</label>
-                <input type="text" class="form-control" id="name" name="name"
-                       aria-describedby="nameHelp"
-                       th:field="*{name}" th:classappend="${errors?.hasFieldErrors('name')}?is-invalid">
-                <div id="nameHelp" class="form-text">The name that will be shown in the leaderboard</div>
-                <div class="invalid-feedback"
-                     th:each="error: ${errors?.getFieldErrors('name')}"
-                     th:text="${error.getDefaultMessage()}">Validation error
-                </div>
-            </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Email address:</label>
-                <input type="text" class="form-control" id="email" name="email"
-                       aria-describedby="emailHelp"
-                       th:field="*{email}" th:classappend="${errors?.hasFieldErrors('email')}?is-invalid">
-                <div id="emailHelp" class="form-text">For logging in, please use your workplace e-mail address</div>
-                <div class="invalid-feedback"
-                     th:each="error: ${errors?.getFieldErrors('email')}"
-                     th:text="${error.getDefaultMessage()}">Validation error
-                </div>
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password:</label>
-                <input type="password" class="form-control" id="password" name="password"
-                       aria-describedby="passwordHelp"
-                       th:field="*{password}"
-                       th:classappend="${errors?.hasFieldErrors('password')}?is-invalid">
-                <div id="passwordHelp" class="form-text">We use HTTPS, and we store it's hash safely, but still, don't
-                    reuse
-                    your usual one.
-                </div>
-                <div class="invalid-feedback"
-                     th:each="error: ${errors?.getFieldErrors('password')}"
-                     th:text="${error.getDefaultMessage()}">Validation error
-                </div>
-            </div>
-            <input type="hidden"
-                   name="${_csrf.parameterName}"
-                   value="${_csrf.token}"/>
-            <button type="submit" class="btn btn-primary">Register</button>
-        </form>
-    </div>
-    <div th:if="${success}">
-        <p>Account created, you can now <a href="/bet">set your bet</a>.</p>
     </div>
 </div>
