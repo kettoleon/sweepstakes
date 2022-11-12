@@ -21,7 +21,9 @@
                         <input type="text" class="form-control" id="name" name="name"
                                aria-describedby="nameHelp"
                                th:field="*{name}" th:classappend="${errors?.hasFieldErrors('name')}?is-invalid">
-                        <div id="nameHelp" class="form-text">The name that will be shown in the leaderboard</div>
+                        <div id="nameHelp" class="form-text">
+                            Make sure you register here with a name that we can correlate with the <a href="https://verse.events/8L63cZHyMBUsX">verse</a> payment.
+                        </div>
                         <div class="invalid-feedback"
                              th:each="error: ${errors?.getFieldErrors('name')}"
                              th:text="${error.getDefaultMessage()}">Validation error
