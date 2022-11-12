@@ -24,7 +24,11 @@
             </thead>
             <tbody class="table-group-divider">
             <tr>
-                <td style="white-space: nowrap;"><i class="bi bi-exclamation-triangle-fill text-warning"></i></td>
+                <td style="white-space: nowrap;"><i class="bi bi-send-exclamation-fill text-danger"></i></td>
+                <td style="white-space: nowrap;">We have not received a payment from that user</td>
+            </tr>
+            <tr>
+                <td style="white-space: nowrap;"><i class="bi bi-database-fill-exclamation text-warning"></i></td>
                 <td style="white-space: nowrap;">the user did not place a bet for this fixture</td>
             </tr>
             <tr>
@@ -119,13 +123,17 @@
             </tr>
             </thead>
             <tbody class="table-group-divider ">
-            <tr th:each="user: ${leaderboard.getParticipatingUsers()}">
-                <td class="text-nowrap" th:text="${user.getName()}">UserName</td>
+            <tr th:each="user: ${leaderboard.getParticipatingUsers()}" th:classappend="${!user.isPaid()?'table-danger':''}">
+                <td class="text-nowrap">
+                    <span th:if="${!user.isPaid()}"><i class="bi bi-send-exclamation-fill text-danger"></i></span>
+                    <span th:text="' '+${user.getName()}">UserName</span></td>
                 <th:block th:each="fixture: ${fixtures}"
                           th:with="betinfo=${leaderboard.getBetInfo(user.getEmail(), fixture.getId())}">
-                    <td style="border-left: 2px solid currentcolor;" class="text-nowrap">
+                    <td style="border-left: 2px solid currentcolor;" class="text-nowrap"
+                        th:classappend="${betinfo.getBet().equals('NP')?'table-warning':''}"
+                    >
                         <i th:if="${betinfo.getBet().equals('NP')}"
-                           class="text-warning bi bi-exclamation-triangle-fill"></i>
+                           class="text-warning bi bi-database-fill-exclamation"></i>
                         <span th:if="${!betinfo.getBet().equals('NP')}" th:text="${betinfo.getBet()}">2-1</span>
                     </td>
                     <th:block th:if="${fixture.isFinished()}">
@@ -173,8 +181,11 @@
         </tr>
         </thead>
         <tbody class="table-group-divider ">
-        <tr th:each="user: ${leaderboard.getParticipatingUsers()}">
-            <td class="text-nowrap" th:text="${user.getName()}">UserName</td>
+        <tr th:each="user: ${leaderboard.getParticipatingUsers()}" th:classappend="${!user.isPaid()?'table-danger':''}">
+            <td class="text-nowrap">
+                <span th:if="${!user.isPaid()}"><i class="bi bi-send-exclamation-fill text-danger"></i></span>
+                <span th:text="' '+${user.getName()}">UserName</span>
+            </td>
             <td class="text-nowrap" th:each="group: ${groups}">
                 <span th:if="${group.isAnyFixtureFinished()}"
                       th:text="'+'+${leaderboard.getUserTotalPoints(user, group)}">+0</span>
@@ -198,7 +209,11 @@
         </thead>
         <tbody class="table-group-divider">
         <tr>
-            <td style="white-space: nowrap;"><i class="bi bi-exclamation-triangle-fill text-warning"></i></td>
+            <td style="white-space: nowrap;"><i class="bi bi-send-exclamation-fill text-danger"></i></td>
+            <td style="white-space: nowrap;">We have not received a payment from that user</td>
+        </tr>
+        <tr>
+            <td style="white-space: nowrap;"><i class="bi bi-database-fill-exclamation text-warning"></i></td>
             <td style="white-space: nowrap;">the user did not place a bet for this fixture</td>
         </tr>
         <tr>

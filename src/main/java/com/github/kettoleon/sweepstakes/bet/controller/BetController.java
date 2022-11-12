@@ -58,13 +58,12 @@ public class BetController {
     private ModelAndView manageBetsPage(Authentication auth, Errors errors) {
         BetsForm form = new BetsForm();
         List<FixtureBet> bets = betsRepository.findAllByEmail(auth.getName());
-        if (bets.isEmpty()) {
-            bets = populateNewBets(auth.getName());
-        }
+        bets = fillWithMissingBets(bets, auth.getName());
         bets = orderBets(bets);
         form.setBets(bets);
 
         return page("bet", "Manage my Bet")
+                .addObject("user", userRepository.findByEmail(auth.getName()).orElseThrow())
                 .addObject("form", form)
                 .addObject("errors", errors);
     }
@@ -77,14 +76,15 @@ public class BetController {
         return ordered;
     }
 
-    private List<FixtureBet> populateNewBets(String email) {
-        List<FixtureBet> bets = new ArrayList<>();
+    private List<FixtureBet> fillWithMissingBets(List<FixtureBet> bets, String email) {
         leagueProvider.getLeague().getFixturesByDate().forEach(fxt -> {
             FixtureBet bet = new FixtureBet();
             bet.setId(UUID.randomUUID().toString());
             bet.setEmail(email);
             bet.setFixtureId(fxt.getId());
-            bets.add(bet);
+            if (bets.stream().filter(fb -> fb.getFixtureId() == fxt.getId()).findFirst().isEmpty()) {
+                bets.add(bet);
+            }
         });
         return bets;
     }

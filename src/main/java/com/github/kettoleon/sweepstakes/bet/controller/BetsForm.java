@@ -13,4 +13,31 @@ public class BetsForm {
 
     private List<FixtureBet> bets = new ArrayList<>();
 
+    public boolean hasMissingBets(){
+        if(areAllBetsMissing()){
+            return false;
+        }
+        return isAnyBetMissing();
+    }
+
+    public boolean isAnyBetMissing(){
+        return !areAllBetsPlaced();
+    }
+    public boolean areAllBetsPlaced(){
+        for(FixtureBet fb : bets){
+            if(!fb.isPlaced()){
+                return false;
+            }
+        }
+        return true;
+    }
+    public boolean areAllBetsMissing() {
+        for(FixtureBet fb : bets){
+            if(fb.isPlaced()){
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
