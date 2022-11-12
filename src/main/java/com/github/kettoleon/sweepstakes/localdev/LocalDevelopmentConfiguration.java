@@ -62,6 +62,9 @@ public class LocalDevelopmentConfiguration {
                 if (r.nextInt(0, 100) > 95) {
                     user.setContact(true);
                 }
+                if (r.nextInt(0, 100) > 95) {
+                    user.setPaid(false);
+                }
                 users.add(user);
                 log.info("    - Created user: " + user.getEmail());
             }
@@ -79,8 +82,21 @@ public class LocalDevelopmentConfiguration {
                     bet.setEmail(user.getEmail());
                     bet.setHome(r.nextInt(0, 6));
                     bet.setAway(r.nextInt(0, 6));
-                    if (r.nextInt(0, 100) > 1) {
-                        bets.add(bet);
+                    bets.add(bet);
+                    if (r.nextInt(0, 100) < 1) {
+                        if (r.nextInt(0, 100) > 50) {
+                            bet.setHome(null);
+                            bet.setAway(null);
+                        } else {
+                            if (r.nextInt(0, 100) > 50) {
+                                bet.setHome(null);
+                            } else {
+                                bet.setAway(null);
+                            }
+                        }
+                        if (r.nextInt(0, 100) > 50) {
+                            bets.remove(bet);
+                        }
                     }
                 }
 
@@ -98,6 +114,7 @@ public class LocalDevelopmentConfiguration {
         user.setEmail(fullName.toLowerCase().replace(' ', '.') + "@gmail.com");
         user.setPasswordHash(passwordEncoder.encode("pass"));
         user.setEnabled(true);
+        user.setPaid(true);
         if (id == 0) {
             user.setName("kettoleon");
             user.setEmail("kettoleon@gmail.com");

@@ -19,5 +19,6 @@ public class User {
     private boolean admin;
     private boolean contact;
     private boolean enabled;
+    private boolean paid;
 
 }

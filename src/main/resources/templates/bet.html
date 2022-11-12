@@ -1,8 +1,31 @@
-<div th:if="${!league.isBeforeStart()}">
-    <p>Sorry, the time to register and place your bet has passed, and this train has left the station. Check your
-        progress in the <a href="leaderboard">leaderboard</a>.</p>
+<div th:if="${!league.isBeforeStart()}" class="alert alert-info d-flex align-items-center" role="alert">
+    <div class="flex-shrink-0 me-2"><i class="bi bi-train-front text-info"></i></div>
+    <div>
+        Sorry, the time to register and place your bet has passed, and this train has left the station. Check your
+        progress in the <a href="leaderboard">leaderboard</a>.
+    </div>
 </div>
+
 <div th:if="${league.isBeforeStart()}">
+
+    <div th:if="${!user.isPaid()}" class="alert alert-danger d-flex align-items-center" role="alert">
+        <div class="flex-shrink-0 me-2"><i class="bi bi-send-exclamation-fill text-danger"></i></div>
+        <div>
+            We have not registered your payment yet. Make sure you have paid through <a href="https://verse.events/8L63cZHyMBUsX">verse</a> or contact us if you have already paid a few days ago.
+        </div>
+    </div>
+    <div th:if="${form.hasMissingBets()}" class="alert alert-warning d-flex align-items-center" role="alert">
+        <div class="flex-shrink-0 me-2"><i class="bi bi-database-fill-exclamation text-warning"></i></div>
+        <div>
+            You still have some missing bets, please review them carefully.
+        </div>
+    </div>
+    <div th:if="${form.areAllBetsPlaced()}" class="alert alert-success d-flex align-items-center" role="alert">
+        <div class="flex-shrink-0 me-2"><i class="bi bi-database-fill-check text-success"></i></div>
+        <div>
+            All bets are set, remember you have until <span th:text="${league.getFormattedStart()}">the day before the first match</span> to make any modifications.
+        </div>
+    </div>
 
     <form action="#" th:action="@{bet}" th:object="${form}" method="post">
 
@@ -22,7 +45,7 @@
                 <td colspan="7">Match</td>
                 </thead>
                 <tbody class="table-group-divider">
-                <tr th:each="bet, itemStat: *{bets}">
+                <tr th:each="bet, itemStat: *{bets}" th:classappend="${form.hasMissingBets() && !bet.isPlaced()?'table-warning':''}">
                     <td><img th:src="${league.getFixtureById(bet.getFixtureId()).getHome().getIcon()}" width="16"
                              height="12"/>
                     </td>

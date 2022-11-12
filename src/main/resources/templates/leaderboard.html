@@ -13,12 +13,13 @@
         positions as the league progresses. It will automatically update itself live during a match.</p>
     <p>You can now check <a href="bets">everyone's bets</a> and print them into a pdf, if you haven't received the
         e-mail.</p>
+    <p>If you see we haven't registered your payment yet, contact us before the first match starts!</p>
     <p>Only remaining thing is to wait for the first match to start! Hyped already?</p>
     <div class="text-center"><i style="font-size: 5em;color: burlywood;" class="bi-smartwatch"></i></div>
 </div>
 <div th:if="${league.hasFirstMatchStarted()}" class="row justify-content-center">
     <p class="text-center">Want a more <a href="tracking">detailed view</a>?</p>
-
+    <p>You have paid, but your user does not appear here? Contact us.</p> <!-- TODO only show if there are enabled users that have not paid? -->
     <table
             class="table table-sm table-hover caption-top"
             th:classappend="${leaderboard.isAnyFixtureStarted()?'':'table-striped'}"

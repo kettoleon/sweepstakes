@@ -16,12 +16,12 @@ public class LeaderboardBet {
     }
 
     public String getBet() {
-        if (fixtureBet == null) return "NP";
+        if (fixtureBet == null || fixtureBet.getHome() == null || fixtureBet.getAway() == null) return "NP";
         return fixtureBet.getHome() + "-" + fixtureBet.getAway();
     }
 
     public boolean shouldCountPoints() {
-        return fixtureBet != null && fixture != null && fixture.isStartedOrFinished();
+        return fixtureBet != null && fixture != null && fixture.isStartedOrFinished() && fixtureBet.isPlaced();
     }
 
     public int getResultPoints() {

@@ -14,6 +14,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.toList;
+
 @Data
 public class Leaderboard {
 
@@ -37,7 +40,7 @@ public class Leaderboard {
             leaderboard.add(entry);
         }
 
-        leaderboard = leaderboard.stream().sorted(Comparator.comparingInt(LeaderboardEntry::getFinishedPoints).reversed()).collect(Collectors.toList());
+        leaderboard = leaderboard.stream().sorted(Comparator.comparingInt(LeaderboardEntry::getFinishedPoints).reversed()).collect(toList());
         int pos = 0;
         int points = Integer.MAX_VALUE;
         for (LeaderboardEntry entry : leaderboard) {
@@ -48,7 +51,7 @@ public class Leaderboard {
             points = entry.getFinishedPoints();
         }
 
-        leaderboard = leaderboard.stream().sorted(Comparator.comparingInt(LeaderboardEntry::getProgressPoints).reversed()).collect(Collectors.toList());
+        leaderboard = leaderboard.stream().sorted(Comparator.comparingInt(LeaderboardEntry::getProgressPoints).reversed()).collect(toList());
         pos = 0;
         points = Integer.MAX_VALUE;
         for (LeaderboardEntry entry : leaderboard) {
@@ -85,7 +88,19 @@ public class Leaderboard {
     }
 
     public List<User> getParticipatingUsers() {
-        return userRepository.findAll().stream().filter(User::isEnabled).sorted(Comparator.comparing(User::getEmail)).collect(Collectors.toList());
+
+        if (league.hasFirstMatchStarted()) {
+            return userRepository.findAll().stream()
+                    .filter(User::isEnabled).filter(User::isPaid)
+                    .sorted(comparing(User::getEmail))
+                    .collect(toList());
+        } else {
+
+            return userRepository.findAll().stream()
+                    .filter(User::isEnabled)
+                    .sorted(comparing(User::getEmail))
+                    .collect(toList());
+        }
     }
 
     public LeaderboardBet getBetInfo(String email, long fixtureId) {
