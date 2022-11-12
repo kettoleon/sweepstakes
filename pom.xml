@@ -11,7 +11,7 @@
 
     <groupId>com.github.kettoleon</groupId>
     <artifactId>sweepstakes</artifactId>
-    <version>0.0.11</version>
+    <version>0.0.12-SNAPSHOT</version>
     <name>sweepstakes</name>
     <description>Project to host your own sweepstakes</description>
 
@@ -24,7 +24,7 @@
 
     <scm>
         <developerConnection>scm:git:https://github.com/kettoleon/sweepstakes.git</developerConnection>
-      <tag>sweepstakes-0.0.11</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <distributionManagement>
