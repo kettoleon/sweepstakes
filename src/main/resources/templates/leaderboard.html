@@ -1,17 +1,17 @@
 <div th:if="${league.isBeforeStart()}">
     <p>The leaderboard will be enabled during the first match of the season. It will show everyone's points and
-        positions as the match progresses.</p>
+        positions as the league progresses. It will automatically update itself live during a match.</p>
     <p>After the bet form is closed at <span th:text="${league.getFormattedStart()}"></span> and before the first match
         at <span th:text="${league.formatTime(league.getFirstMatchTime())}"></span>, we will print a copy of
         <a href="bets">everyone's bets</a> and send it to everyone by e-mail.</p>
-    <p>In the meantime, make sure you have <a href="bet">placed your bet</a>!</p>
+    <p>In the meantime, make sure you have <a href="bet">placed your bet</a> and paid through <a href="https://verse.events/8L63cZHyMBUsX">verse</a>!</p>
     <div class="text-center"><i style="font-size: 5em;color: burlywood;" class="bi-calendar-heart text-center"></i>
     </div>
 </div>
 <div th:if="${!league.isBeforeStart() && !league.hasFirstMatchStarted()}">
     <p>The leaderboard will be enabled during the first match of the season. It will show everyone's points and
-        positions as the match progresses.</p>
-    <p>You can now see <a href="bets">everyone's bets</a> and print them into a pdf, if you haven't received the
+        positions as the league progresses. It will automatically update itself live during a match.</p>
+    <p>You can now check <a href="bets">everyone's bets</a> and print them into a pdf, if you haven't received the
         e-mail.</p>
     <p>Only remaining thing is to wait for the first match to start! Hyped already?</p>
     <div class="text-center"><i style="font-size: 5em;color: burlywood;" class="bi-smartwatch"></i></div>
