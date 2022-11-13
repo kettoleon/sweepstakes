@@ -92,12 +92,14 @@ public class LeaderboardBet {
     }
 
     public int getBonusPoints() {
-        if (shouldCountPoints()) {
-            if (homeScoreMatches() && awayScoreMatches()) {
-                return 2;
-            }
+        if (isExactPrediction()) {
+            return 2;
         }
         return 0;
+    }
+
+    public boolean isExactPrediction() {
+        return shouldCountPoints() && homeScoreMatches() && awayScoreMatches();
     }
 
     public int getTotalPoints() {

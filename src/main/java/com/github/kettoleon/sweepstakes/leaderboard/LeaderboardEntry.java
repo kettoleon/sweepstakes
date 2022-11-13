@@ -11,6 +11,11 @@ public class LeaderboardEntry {
     private int progressPosition;
     private int progressPoints;
 
+    private int finishedExactPredictions;
+    private int progressExactPredictions;
+
+    private double prize;
+
     public String getPoints() {
         if (pointsDelta() == 0) {
             return progressPoints + "";

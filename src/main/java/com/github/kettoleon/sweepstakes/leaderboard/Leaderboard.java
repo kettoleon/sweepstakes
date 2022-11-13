@@ -1,7 +1,6 @@
 package com.github.kettoleon.sweepstakes.leaderboard;
 
 import com.github.kettoleon.sweepstakes.bet.repo.BetsRepository;
-import com.github.kettoleon.sweepstakes.bet.repo.FixtureBet;
 import com.github.kettoleon.sweepstakes.league.model.Fixture;
 import com.github.kettoleon.sweepstakes.league.model.League;
 import com.github.kettoleon.sweepstakes.users.repo.User;
@@ -10,11 +9,11 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.util.Comparator.comparing;
+import static java.util.Comparator.comparingInt;
 import static java.util.stream.Collectors.toList;
 
 @Data
@@ -32,35 +31,66 @@ public class Leaderboard {
 
     public List<LeaderboardEntry> getLeaderboardEntries() {
         List<LeaderboardEntry> leaderboard = new ArrayList<>();
+
+        int stakes = getParticipatingUsers().size()*5;
+
         for (User user : getParticipatingUsers()) {
             LeaderboardEntry entry = new LeaderboardEntry();
             entry.setUserName(user.getName());
             entry.setFinishedPoints(getUserTotalPoints(user));
             entry.setProgressPoints(getUserProgressPoints(user));
+            entry.setFinishedExactPredictions(getUserExactPredictions(user));
+            entry.setProgressExactPredictions(getUserProgressExactPredictions(user));
             leaderboard.add(entry);
         }
 
-        leaderboard = leaderboard.stream().sorted(Comparator.comparingInt(LeaderboardEntry::getFinishedPoints).reversed()).collect(toList());
+        leaderboard = leaderboard.stream()
+                .sorted(comparingInt(LeaderboardEntry::getFinishedPoints)
+                        .thenComparingInt(LeaderboardEntry::getFinishedExactPredictions)
+                        .reversed())
+                .collect(toList());
         int pos = 0;
         int points = Integer.MAX_VALUE;
+        int exactGuesses = Integer.MAX_VALUE;
         for (LeaderboardEntry entry : leaderboard) {
-            if (points > entry.getFinishedPoints()) {
+            if (!(points == entry.getFinishedPoints() && exactGuesses == entry.getFinishedExactPredictions())) {
                 pos++;
             }
             entry.setFinishedPosition(pos);
             points = entry.getFinishedPoints();
+            exactGuesses = entry.getFinishedExactPredictions();
         }
 
-        leaderboard = leaderboard.stream().sorted(Comparator.comparingInt(LeaderboardEntry::getProgressPoints).reversed()).collect(toList());
+        leaderboard = leaderboard.stream()
+                .sorted(comparingInt(LeaderboardEntry::getProgressPoints)
+                        .thenComparingInt(LeaderboardEntry::getProgressExactPredictions)
+                        .reversed())
+                .collect(toList());
         pos = 0;
         points = Integer.MAX_VALUE;
+        exactGuesses = Integer.MAX_VALUE;
         for (LeaderboardEntry entry : leaderboard) {
-            if (points > entry.getProgressPoints()) {
+            if (!(points == entry.getProgressPoints() && exactGuesses == entry.getProgressExactPredictions())) {
                 pos++;
             }
             entry.setProgressPosition(pos);
             points = entry.getProgressPoints();
+            exactGuesses = entry.getProgressExactPredictions();
         }
+
+        List<LeaderboardEntry> firstPosition = leaderboard.stream().filter(e -> e.getProgressPosition() == 1).collect(toList());
+        double fprize = Math.floor(100*((stakes*0.7)/firstPosition.size()))/100;
+        firstPosition.forEach(e -> e.setPrize(fprize));
+
+        List<LeaderboardEntry> secondPosition = leaderboard.stream().filter(e -> e.getProgressPosition() == 2).collect(toList());
+        double sprize = Math.floor(100*((stakes*0.2)/secondPosition.size()))/100;
+        secondPosition.forEach(e -> e.setPrize(sprize));
+
+        List<LeaderboardEntry> thirdPosition = leaderboard.stream().filter(e -> e.getProgressPosition() == 3).collect(toList());
+        double tprize = Math.floor(100*((stakes*0.1)/thirdPosition.size()))/100;
+        thirdPosition.forEach(e -> e.setPrize(tprize));
+
+
 
         return leaderboard;
     }
@@ -124,8 +154,16 @@ public class Leaderboard {
         return league.getFixtures().stream().filter(Fixture::isFinished).mapToInt(f -> getBetInfo(user.getEmail(), f.getId()).getTotalPoints()).sum();
     }
 
+    public int getUserExactPredictions(User user) {
+        return (int) league.getFixtures().stream().filter(Fixture::isFinished).filter(f -> getBetInfo(user.getEmail(), f.getId()).isExactPrediction()).count();
+    }
+
     private int getUserProgressPoints(User user) {
         return league.getFixtures().stream().filter(Fixture::isStartedOrFinished).mapToInt(f -> getBetInfo(user.getEmail(), f.getId()).getTotalPoints()).sum();
+    }
+
+    private int getUserProgressExactPredictions(User user) {
+        return (int) league.getFixtures().stream().filter(Fixture::isStartedOrFinished).filter(f -> getBetInfo(user.getEmail(), f.getId()).isExactPrediction()).count();
     }
 
     public boolean isAnyFixtureFinished() {
