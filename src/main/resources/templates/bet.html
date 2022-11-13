@@ -30,14 +30,10 @@
     <form action="#" th:action="@{bet}" th:object="${form}" method="post">
 
         <div class="row justify-content-center">
-            <div class="alert alert-danger d-flex align-items-center" role="alert"
-                 th:if="${errors?.hasErrors()}">
-                <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:">
-                    <use xlink:href="#exclamation-triangle-fill"/>
-                </svg>
-                <div>
-                    There were errors setting some of your bets. Please review them and fix.
-                </div>
+
+            <div th:if="${errors?.hasErrors()}" class="alert alert-danger d-flex align-items-center" role="alert">
+                <div class="flex-shrink-0 me-2"><i class="bi bi-exclamation-triangle-fill text-danger"></i></div>
+                <div>There were errors setting some of your bets. Please review them and fix.</div>
             </div>
 
             <table class="table table-sm table-striped table-hover caption-top" style="width: 1px;">
@@ -45,7 +41,7 @@
                 <td colspan="7">Match</td>
                 </thead>
                 <tbody class="table-group-divider">
-                <tr th:each="bet, itemStat: *{bets}" th:classappend="${form.hasMissingBets() && !bet.isPlaced()?'table-warning':''}">
+                <tr th:each="bet, itemStat: *{bets}" th:classappend="${(errors?.hasFieldErrors('bets['+itemStat.index+'].home') || errors?.hasFieldErrors('bets['+itemStat.index+'].away'))?'table-danger':((form.hasMissingBets() && !bet.isPlaced())?'table-warning':'')}">
                     <td><img th:src="${league.getFixtureById(bet.getFixtureId()).getHome().getIcon()}" width="16"
                              height="12"/>
                     </td>

@@ -33,6 +33,7 @@ public class WebController {
 
     public ModelAndView page(String viewId, String title) {
         ModelAndView modelAndView = new ModelAndView("index");
+        modelAndView.addObject("version", getClass().getPackage().getImplementationVersion());
         modelAndView.addObject("page", viewId);
         modelAndView.addObject("pageTitle", title);
         League league = leagueProvider.getLeague();

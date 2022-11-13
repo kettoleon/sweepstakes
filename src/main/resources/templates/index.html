@@ -74,8 +74,12 @@
         </div>
     </div>
     <footer class="d-print-none bg-light text-center text-lg-start">
-        <div class="text-center p-3 bg-dark rounded text-light">Made with &#10084; by
-            <a class="text-light" href="https://github.com/kettoleon">kettoleon</a>.
+        <div class="text-center p-3 bg-dark rounded text-light">
+            <div th:if="${version}">Sweepstakes v<span th:text="${version}"></span> | </div>
+            <div>
+                Made with &#10084; by
+                <a class="text-light" href="https://github.com/kettoleon">kettoleon</a>.
+            </div>
         </div>
     </footer>
 </div>

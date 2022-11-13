@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -125,7 +126,11 @@ public class UserController {
     }
 
     private List<String> getPropertyAllowedEmailDomains() {
-        return Arrays.stream(environment.getProperty("registration.domains.allowed", "").split(",")).collect(Collectors.toList());
+        String v = environment.getProperty("registration.domains.allowed", "");
+        if(v.isBlank()){
+            return Collections.emptyList();
+        }
+        return Arrays.stream(v.split(",")).collect(Collectors.toList());
     }
 
     private boolean emailFromAllowedDomains(String email) {
