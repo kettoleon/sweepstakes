@@ -1,6 +1,5 @@
 package com.github.kettoleon.sweepstakes.users.controller;
 
-import com.github.kettoleon.sweepstakes.league.model.League;
 import com.github.kettoleon.sweepstakes.league.LeagueProvider;
 import com.github.kettoleon.sweepstakes.users.repo.User;
 import com.github.kettoleon.sweepstakes.users.repo.UserRepository;
@@ -22,6 +21,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import static com.github.kettoleon.sweepstakes.configuration.GlobalTemplateVariables.page;
 
 @Controller
 public class UserController {
@@ -49,12 +50,12 @@ public class UserController {
 
     @GetMapping("/register")
     public ModelAndView register() {
-        return page("register", "Registration Form").addObject("user", new FormUser()).addObject("success", false);
+        return page("register", "Registration Form").addObject("formUser", new FormUser()).addObject("success", false);
     }
 
     @PostMapping("/register")
     public ModelAndView registerUserAccount(
-            @ModelAttribute("user") @Validated FormUser formUser,
+            @ModelAttribute("formUser") @Validated FormUser formUser,
             Errors errors
     ) {
 
@@ -74,7 +75,7 @@ public class UserController {
         boolean success = !errors.hasErrors();
 
         return page("register", "Registration Form")
-                .addObject("user", formUser)
+                .addObject("formUser", formUser)
                 .addObject("errors", errors)
                 .addObject("success", success)
                 ;
@@ -170,12 +171,4 @@ public class UserController {
         return adminUsers();
     }
 
-    public ModelAndView page(String viewId, String title) {
-        ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("page", viewId);
-        modelAndView.addObject("pageTitle", title);
-        League league = leagueProvider.getLeague();
-        modelAndView.addObject("league", league);
-        return modelAndView;
-    }
 }

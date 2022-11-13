@@ -56,7 +56,8 @@
                 </ul>
                 <ul class="navbar-nav navbar-right">
                     <li class="nav-item">
-                        <a class="nav-link" th:classappend="${page.equals('login')}?active" href="login">Log In</a>
+                        <a class="nav-link" th:if="${user == null}" th:classappend="${page.equals('login')}?active" href="login">Log In</a>
+                        <a class="nav-link" th:if="${user != null}" th:classappend="${page.equals('logout')}?active" href="logout">Log Out</a>
                     </li>
                 </ul>
 
@@ -74,9 +75,9 @@
         </div>
     </div>
     <footer class="d-print-none bg-light text-center text-lg-start">
-        <div class="text-center p-3 bg-dark rounded text-light">
-            <div th:if="${version}">Sweepstakes v<span th:text="${version}"></span> | </div>
-            <div>
+        <div class="text-center p-3 bg-dark rounded text-light row">
+            <div class="col-4 text-secondary" th:if="${version}">Sweepstakes v<span th:text="${version}"></span></div>
+            <div class="col-4">
                 Made with &#10084; by
                 <a class="text-light" href="https://github.com/kettoleon">kettoleon</a>.
             </div>

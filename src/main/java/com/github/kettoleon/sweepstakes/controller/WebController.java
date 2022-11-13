@@ -1,7 +1,5 @@
 package com.github.kettoleon.sweepstakes.controller;
 
-import com.github.kettoleon.sweepstakes.league.model.League;
-import com.github.kettoleon.sweepstakes.league.LeagueProvider;
 import com.github.kettoleon.sweepstakes.users.repo.User;
 import com.github.kettoleon.sweepstakes.users.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +9,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.stream.Collectors;
 
+import static com.github.kettoleon.sweepstakes.configuration.GlobalTemplateVariables.page;
+
 @Controller
 public class WebController {
-
-    @Autowired
-    private LeagueProvider leagueProvider;
 
     @Autowired
     private UserRepository userRepository;
@@ -29,16 +26,6 @@ public class WebController {
     @GetMapping("/calendar")
     public ModelAndView calendar() {
         return page("calendar", "Calendar");
-    }
-
-    public ModelAndView page(String viewId, String title) {
-        ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("version", getClass().getPackage().getImplementationVersion());
-        modelAndView.addObject("page", viewId);
-        modelAndView.addObject("pageTitle", title);
-        League league = leagueProvider.getLeague();
-        modelAndView.addObject("league", league);
-        return modelAndView;
     }
 
 }

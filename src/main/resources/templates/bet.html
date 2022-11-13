@@ -41,7 +41,11 @@
                 <td colspan="7">Match</td>
                 </thead>
                 <tbody class="table-group-divider">
+                <!-- TODO this coloring condition gave problems when all bets were set -->
+                <!--
                 <tr th:each="bet, itemStat: *{bets}" th:classappend="${(errors?.hasFieldErrors('bets['+itemStat.index+'].home') || errors?.hasFieldErrors('bets['+itemStat.index+'].away'))?'table-danger':((form.hasMissingBets() && !bet.isPlaced())?'table-warning':'')}">
+                -->
+                <tr th:each="bet, itemStat: *{bets}" th:classappend="${(form.hasMissingBets() && !bet.isPlaced())?'table-warning':''}">
                     <td><img th:src="${league.getFixtureById(bet.getFixtureId()).getHome().getIcon()}" width="16"
                              height="12"/>
                     </td>
