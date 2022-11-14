@@ -95,7 +95,20 @@ public class BetController {
         if (!leagueProvider.getLeague().isBeforeStart()) {
             return page("bet", "Manage my Bet");
         }
-        form.getBets().forEach(b -> b.setEmail(auth.getName())); //Make sure no one changes everyone else's bets ¬¬
+
+        for (int i = 0; i < form.getBets().size(); i++) {
+            FixtureBet fb = form.getBets().get(i);
+            if (fb.getAway() < 0 || fb.getAway() > 100) {
+                fb.setAway(null);
+                errors.rejectValue("bets[" + i + "].away", "outOfBounds", "Number of goals has to be between 0 and 100");
+            }
+            if (fb.getHome() < 0 || fb.getHome() > 100) {
+                fb.setHome(null);
+                errors.rejectValue("bets[" + i + "].home", "outOfBounds", "Number of goals has to be between 0 and 100");
+            }
+            fb.setEmail(auth.getName()); //Make sure no one changes everyone else's bets ¬¬
+        }
+
         betsRepository.saveAllAndFlush(form.getBets());
         return manageBetsPage(auth, errors);
     }
