@@ -98,11 +98,11 @@ public class BetController {
 
         for (int i = 0; i < form.getBets().size(); i++) {
             FixtureBet fb = form.getBets().get(i);
-            if (fb.getAway() < 0 || fb.getAway() > 100) {
+            if (fb.getAway() != null && (fb.getAway() < 0 || fb.getAway() > 100)) {
                 fb.setAway(null);
                 errors.rejectValue("bets[" + i + "].away", "outOfBounds", "Number of goals has to be between 0 and 100");
             }
-            if (fb.getHome() < 0 || fb.getHome() > 100) {
+            if (fb.getHome() != null && (fb.getHome() < 0 || fb.getHome() > 100)) {
                 fb.setHome(null);
                 errors.rejectValue("bets[" + i + "].home", "outOfBounds", "Number of goals has to be between 0 and 100");
             }
