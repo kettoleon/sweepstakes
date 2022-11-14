@@ -11,7 +11,9 @@
     <div th:if="${!user.isPaid()}" class="alert alert-danger d-flex align-items-center" role="alert">
         <div class="flex-shrink-0 me-2"><i class="bi bi-send-exclamation-fill text-danger"></i></div>
         <div>
-            We have not registered your payment yet. Make sure you have paid through <a href="https://verse.events/8L63cZHyMBUsX">verse</a> or contact us if you have already paid a few days ago.
+            We have not registered your payment yet. Make sure you have sent <strong>5€</strong> to <span
+                class="badge bg-info text-dark">639773402</span> through Bizum or contact us if you have already paid a
+            few days ago.
         </div>
     </div>
     <div th:if="${form.hasMissingBets()}" class="alert alert-warning d-flex align-items-center" role="alert">
