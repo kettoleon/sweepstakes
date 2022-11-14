@@ -27,8 +27,7 @@ public class SecurityConfiguration {
 
                 )
                 .userDetailsService(userDetailsService)
-                .logout(logout -> logout.permitAll())
-                .csrf().disable() //TODO not disable this
+                .logout(logout -> logout.permitAll().logoutUrl("/logout").logoutSuccessUrl("/rules"))
         ;
 
         return http.build();

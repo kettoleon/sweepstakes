@@ -12,6 +12,8 @@
         }
 
 
+
+
     </style>
 </head>
 <body>
@@ -55,8 +57,14 @@
                 </ul>
                 <ul class="navbar-nav navbar-right">
                     <li class="nav-item">
-                        <a class="nav-link" th:if="${user == null}" th:classappend="${page.equals('login')}?active" href="login">Log In</a>
-                        <a class="nav-link" th:if="${user != null}" th:classappend="${page.equals('logout')}?active" href="logout">Log Out</a>
+                        <a class="nav-link" th:if="${user == null}" th:classappend="${page.equals('login')}?active"
+                           href="login">Log In</a>
+                        <form th:if="${user != null}" action="logout" method="post">
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                            <button type="submit" class="nav-link btn btn-link"
+                                    th:classappend="${page.equals('logout')}?active">Log out
+                            </button>
+                        </form>
                     </li>
                 </ul>
 
