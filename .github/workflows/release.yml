@@ -35,10 +35,17 @@ jobs:
 
       - uses: actions-ecosystem/action-get-latest-tag@v1
         id: get-latest-tag
-        
+
       - name: Update CHANGELOG.md
         id: changelog
         uses: Requarks/changelog-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ steps.get-latest-tag.outputs.tag }}
+
+      - name: Commit CHANGELOG.md
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          branch: master
+          commit_message: 'docs: update CHANGELOG.md for ${{ steps.get-latest-tag.outputs.tag }} [skip ci]'
+          file_pattern: CHANGELOG.md
