@@ -1,6 +1,7 @@
 package com.github.kettoleon.sweepstakes.leaderboard;
 
 import lombok.Data;
+import org.javamoney.moneta.Money;
 
 @Data
 public class LeaderboardEntry {
@@ -14,7 +15,7 @@ public class LeaderboardEntry {
     private int finishedExactPredictions;
     private int progressExactPredictions;
 
-    private double prize;
+    private Money prize;
 
     public String getPoints() {
         if (pointsDelta() == 0) {

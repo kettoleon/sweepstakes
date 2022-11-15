@@ -42,7 +42,8 @@ public class LocalDevelopmentConfiguration {
     private Random r = new Random();
 
     @Bean
-    public LeagueProvider mockedLeagueProvider() {
+    @Primary
+    public MockedLeagueProvider mockedLeagueProvider() {
         return new MockedLeagueProvider("before", new MockedApiFootballClient(1, 2022));
     }
 

@@ -15,6 +15,31 @@
         <p>The League has already started, maybe you were looking for the <a href="tracking">leaderboard details</a>?
         </p>
     </div>
+
+    <div class="row justify-content-center">
+        <table class="table table-sm table-striped table-hover caption-top" style="width: 1px;">
+            <caption>Prizes:</caption>
+            <tbody>
+            <tr class="bg-gradient" style="background-color:gold;">
+                <td style="white-space: nowrap;">First Place (70%)</td>
+                <td style="white-space: nowrap; text-align:right;" th:text="${leaderboard.moneyFormat(leaderboard.getPrizeFirst())}"></td>
+            </tr>
+            <tr class="bg-gradient" style="background-color:silver;">
+                <td style="white-space: nowrap;">Second Place (20%)</td>
+                <td style="white-space: nowrap; text-align:right;" th:text="${leaderboard.moneyFormat(leaderboard.getPrizeSecond())}"></td>
+            </tr>
+            <tr class="bg-gradient" style="background-color:#CD7F32;">
+                <td style="white-space: nowrap;">Third Place (10%)</td>
+                <td style="white-space: nowrap; text-align:right;" th:text="${leaderboard.moneyFormat(leaderboard.getPrizeThird())}"></td>
+            </tr>
+            <tr class="table-dark table-group-divider">
+                <th style="white-space: nowrap;">Total Pot</th>
+                <th style="white-space: nowrap; text-align:right;" th:text="${leaderboard.moneyFormat(leaderboard.getPot())}"></th>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
     <div class="row justify-content-center">
         <table class="table table-sm table-striped table-hover caption-top" style="width: 1px;">
             <caption>Legend:</caption>
@@ -25,7 +50,7 @@
             <tbody class="table-group-divider">
             <tr>
                 <td style="white-space: nowrap;"><i class="bi bi-send-exclamation-fill text-danger"></i></td>
-                <td style="white-space: nowrap;">We have not received a payment from that user</td>
+                <td style="white-space: nowrap;">we have not received a payment from that user</td>
             </tr>
             <tr>
                 <td style="white-space: nowrap;"><i class="bi bi-database-fill-exclamation text-warning"></i></td>
@@ -210,7 +235,7 @@
         <tbody class="table-group-divider">
         <tr>
             <td style="white-space: nowrap;"><i class="bi bi-send-exclamation-fill text-danger"></i></td>
-            <td style="white-space: nowrap;">We have not received a payment from that user</td>
+            <td style="white-space: nowrap;">we have not received a payment from that user</td>
         </tr>
         <tr>
             <td style="white-space: nowrap;"><i class="bi bi-database-fill-exclamation text-warning"></i></td>
