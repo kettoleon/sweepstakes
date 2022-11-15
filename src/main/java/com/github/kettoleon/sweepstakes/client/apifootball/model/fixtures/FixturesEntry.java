@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 
 @Data
 @NoArgsConstructor
@@ -52,4 +53,7 @@ public class FixturesEntry {
         return fixture.getStatus().isBeingPlayed();
     }
 
+    public boolean isToday() {
+        return getTime().isAfter(LocalDateTime.now().truncatedTo(ChronoUnit.DAYS)) && getTime().isBefore(LocalDateTime.now().plusDays(1).truncatedTo(ChronoUnit.DAYS));
+    }
 }

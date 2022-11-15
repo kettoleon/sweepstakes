@@ -1,2 +1,8 @@
 # Project exclude paths
 /target/
+/logs/
+/cache/
+/.idea/
+service.pid
+sweepstakes.db.*
+localdev.properties

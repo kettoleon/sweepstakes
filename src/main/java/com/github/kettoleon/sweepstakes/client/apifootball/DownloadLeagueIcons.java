@@ -3,6 +3,7 @@ package com.github.kettoleon.sweepstakes.client.apifootball;
 import com.github.kettoleon.sweepstakes.client.apifootball.model.countries.CountriesResponse;
 import com.github.kettoleon.sweepstakes.client.apifootball.model.countries.Country;
 import com.github.kettoleon.sweepstakes.client.apifootball.model.fixtures.FixturesResponse;
+import com.github.kettoleon.sweepstakes.localdev.MockedApiFootballClient;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
@@ -15,7 +16,7 @@ import java.nio.channels.ReadableByteChannel;
 public class DownloadLeagueIcons {
 
     public static void main(String[] args) {
-        ApiFootballClient apiFootballClient = new ApiFootballClient(1, 2022);
+        ApiFootballClient apiFootballClient = new MockedApiFootballClient(1, 2022);
         CountriesResponse countries = apiFootballClient.getCountries();
         FixturesResponse fixtures = apiFootballClient.getFixtures();
         fixtures.getResponse().forEach(fe -> {
