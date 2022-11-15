@@ -12,7 +12,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
+      - name: Clear workspace
+        uses: chick-fil-a/gha-clear-workspace@v1
       - name: Checkout project
         uses: actions/checkout@v2
 
