@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [sweepstakes-0.0.27] - 2022-11-20
+### :bug: Bug Fixes
+- [`edfcadb`](https://github.com/kettoleon/sweepstakes/commit/edfcadb3c7603c9948c29afb8b86d6b8dc43cd41) - The server had a different timezone... *(commit by [@kettoleon](https://github.com/kettoleon))*
+
+
 ## [sweepstakes-0.0.25] - 2022-11-15
 ### :wrench: Chores
 - [`30553da`](https://github.com/kettoleon/sweepstakes/commit/30553da8f26a2836a7974f2c6773e620fdd59939) - Trying to fix build in github actions *(commit by [@kettoleon](https://github.com/kettoleon))*
@@ -46,3 +51,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [sweepstakes-0.0.22]: https://github.com/kettoleon/sweepstakes/compare/sweepstakes-0.0.21...sweepstakes-0.0.22
 [sweepstakes-0.0.23]: https://github.com/kettoleon/sweepstakes/compare/sweepstakes-0.0.22...sweepstakes-0.0.23
 [sweepstakes-0.0.25]: https://github.com/kettoleon/sweepstakes/compare/sweepstakes-0.0.24...sweepstakes-0.0.25
+[sweepstakes-0.0.27]: https://github.com/kettoleon/sweepstakes/compare/sweepstakes-0.0.26...sweepstakes-0.0.27
