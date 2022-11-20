@@ -3,7 +3,7 @@
 mkdir -p logs
 LOG_FILE="logs/$(date +%Y.%m.%d_%H.%M.%S).log"
 
-nohup java -jar sweepstakes-*.jar -Duser.timezone="Europe/Madrid" --server.port=8100 --spring.config.location=classpath:/application.properties,environment.properties &>> ${LOG_FILE} &
+nohup java -Duser.timezone="Europe/Madrid" -jar sweepstakes-*.jar --server.port=8100 --spring.config.location=classpath:/application.properties,environment.properties &>> ${LOG_FILE} &
 
 until [ -f "${LOG_FILE}" ]
 do
