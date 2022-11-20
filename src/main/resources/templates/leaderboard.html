@@ -20,7 +20,7 @@
 </div>
 <div th:if="${league.hasFirstMatchStarted()}" class="row justify-content-center">
     <p class="text-center">Want a more <a href="tracking">detailed view</a>?</p>
-    <p>You have paid, but your user does not appear here? Contact us.</p> <!-- TODO only show if there are enabled users that have not paid? -->
+    <!-- <p>You have paid, but your user does not appear here? Contact us.</p> TODO only show if there are enabled users that have not paid? -->
     <table
             class="table table-sm table-hover caption-top"
             th:classappend="${leaderboard.isAnyFixtureStarted()?'':'table-striped'}"
