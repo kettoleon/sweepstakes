@@ -99,7 +99,6 @@ public class RestApiFootballClient implements ApiFootballClient {
                     // Otherwise, during matches, estimated remaining minutes of playtime of the day / remaining requests
                     double remainingLiveMinutesToday = estimateRemainingMinutes();
                     int timeToLiveInMinutes = (int) Math.max(1, Math.ceil(remainingLiveMinutesToday / (maxRequestsPerDay - requestsToday)));
-                    log.info("Checking if we need to update data during a match. Last cache time: {}, TTL: {}min, LiveMinutesLeft: {}min, RequestsLeft: {} ", lastCacheTime, timeToLiveInMinutes, remainingLiveMinutesToday, maxRequestsPerDay - requestsToday);
                     if (LocalDateTime.now().isAfter(lastCacheTime.plusMinutes(timeToLiveInMinutes))) {
                         log.info("Updating fixtures cache during a match. Last cache time: {}, TTL: {}min, LiveMinutesLeft: {}min, RequestsLeft: {}", lastCacheTime, timeToLiveInMinutes, remainingLiveMinutesToday, maxRequestsPerDay - requestsToday);
                         updateInMemoryFixturesCache();
@@ -145,8 +144,10 @@ public class RestApiFootballClient implements ApiFootballClient {
         LocalDateTime newRequestTime = LocalDateTime.now();
         try {
             File file = new File(getCacheFolder(), newRequestTime.format(CACHE_FILE_NAME_DATE_FORMAT) + ".json");
-            Files.writeString(file.toPath(), response.getBody());
+            String body = response.getBody();
+            Files.writeString(file.toPath(), body);
             log.info("New fixtures data stored at {}", file.getAbsoluteFile().getAbsolutePath());
+            inMemoryFixturesCache = objectMapper.readValue(body, FixturesResponse.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
