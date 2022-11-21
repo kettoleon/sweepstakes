@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [sweepstakes-0.0.31] - 2022-11-21
+### :wrench: Chores
+- [`e9e81e2`](https://github.com/kettoleon/sweepstakes/commit/e9e81e2bf8f7232bcc664af2bb4e24f24f304c38) - Investigating how the data is not being updated live during a match *(commit by [@kettoleon](https://github.com/kettoleon))*
+
+
 ## [sweepstakes-0.0.29] - 2022-11-20
 ### :bug: Bug Fixes
 - [`fc59fab`](https://github.com/kettoleon/sweepstakes/commit/fc59fab596571ca83335c60bb9f3d3368b93d284) - Trying to disable thymeleaf cache, as data is updated behind the scenes, but not in the frontend. *(commit by [@kettoleon](https://github.com/kettoleon))*
@@ -64,3 +69,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [sweepstakes-0.0.27]: https://github.com/kettoleon/sweepstakes/compare/sweepstakes-0.0.26...sweepstakes-0.0.27
 [sweepstakes-0.0.28]: https://github.com/kettoleon/sweepstakes/compare/sweepstakes-0.0.27...sweepstakes-0.0.28
 [sweepstakes-0.0.29]: https://github.com/kettoleon/sweepstakes/compare/sweepstakes-0.0.28...sweepstakes-0.0.29
+[sweepstakes-0.0.31]: https://github.com/kettoleon/sweepstakes/compare/sweepstakes-0.0.30...sweepstakes-0.0.31
