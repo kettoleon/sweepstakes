@@ -26,6 +26,7 @@
             th:classappend="${leaderboard.isAnyFixtureStarted()?'':'table-striped'}"
             style="width: 1px;"
     >
+        <caption th:if="${lastUpdate != null && nextUpdate != null}">Last update: <span th:text="${lastUpdate}"></span>, Next update: <span th:text="${nextUpdate}"></span></caption>
         <thead>
         <tr>
             <th data-toggle="tooltip" data-placement="top" title="Position">Pos</th>

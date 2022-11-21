@@ -95,18 +95,27 @@ public class RestApiFootballClient implements ApiFootballClient {
                     updateInMemoryFixturesCache();
                 }
             } else {
-                if (aMatchShouldBeInProgress()) {
+                if (LocalDateTime.now().isAfter(getNextUpdateTime())) {
                     // Otherwise, during matches, estimated remaining minutes of playtime of the day / remaining requests
-                    double remainingLiveMinutesToday = estimateRemainingMinutes();
-                    int timeToLiveInMinutes = (int) Math.max(1, Math.ceil(remainingLiveMinutesToday / (maxRequestsPerDay - requestsToday)));
-                    if (LocalDateTime.now().isAfter(lastCacheTime.plusMinutes(timeToLiveInMinutes))) {
-                        log.info("Updating fixtures cache during a match. Last cache time: {}, TTL: {}min, LiveMinutesLeft: {}min, RequestsLeft: {}", lastCacheTime, timeToLiveInMinutes, remainingLiveMinutesToday, maxRequestsPerDay - requestsToday);
-                        updateInMemoryFixturesCache();
-                    }
+                    updateInMemoryFixturesCache();
                 }
             }
         } catch (Throwable e) {
             log.error("Unable to update cached information about fixtures.", e);
+        }
+    }
+
+    public LocalDateTime getNextUpdateTime() {
+        if(aMatchShouldBeInProgress()) {
+            double remainingLiveMinutesToday = estimateRemainingMinutes();
+            int timeToLiveInMinutes = (int) Math.max(1, Math.ceil(remainingLiveMinutesToday / (maxRequestsPerDay - requestsToday)));
+            LocalDateTime nextUpdateTime = lastCacheTime.plusMinutes(timeToLiveInMinutes);
+            log.info("Updating fixtures cache during a match. Last cache time: {}, TTL: {}min, LiveMinutesLeft: {}min, RequestsLeft: {}", lastCacheTime, timeToLiveInMinutes, remainingLiveMinutesToday, maxRequestsPerDay - requestsToday);
+            return nextUpdateTime;
+        }else{
+            return inMemoryFixturesCache.getResponse().stream()
+                    .map(FixturesEntry::getTime)
+                    .filter(t -> t.isAfter(LocalDateTime.now())).min(Comparator.naturalOrder()).orElse(lastCacheTime.plusDays(1));
         }
     }
 
@@ -236,4 +245,7 @@ public class RestApiFootballClient implements ApiFootballClient {
         return LocalDateTime.parse(StringUtils.substringBeforeLast(f.getName(), ".json"), CACHE_FILE_NAME_DATE_FORMAT);
     }
 
+    public LocalDateTime getLastCacheTime() {
+        return lastCacheTime;
+    }
 }

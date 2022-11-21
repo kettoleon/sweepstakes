@@ -25,10 +25,16 @@ public class Sweepstakes {
 
     @Bean
     @ConditionalOnProperty(name = "rapidapi.key")
-    public LeagueProvider leagueProvider(Environment environment) {
+    public LeagueProvider leagueProvider(RestApiFootballClient restApiFootballClient) {
+        return new ApiFootballLeagueProvider(restApiFootballClient);
+    }
+
+    @Bean
+    @ConditionalOnProperty(name = "rapidapi.key")
+    public RestApiFootballClient restApiFootballClient(Environment environment) {
         String rapidApiHost = environment.getProperty("rapidapi.host", "api-football-v1.p.rapidapi.com");
         String rapidApiKey = environment.getRequiredProperty("rapidapi.key");
-        return new ApiFootballLeagueProvider(new RestApiFootballClient(1, 2022, rapidApiHost, rapidApiKey));
+        return new RestApiFootballClient(1, 2022, rapidApiHost, rapidApiKey);
     }
 
 }

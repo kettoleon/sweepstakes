@@ -19,8 +19,7 @@ public class League {
     public String name;
     public String season;
     public String logo;
-    //    public LocalDateTime start;
-//    public LocalDateTime end;
+
     public List<Fixture> fixtures = new ArrayList<>();
 
     public List<Fixture> getFixturesByDate() {
