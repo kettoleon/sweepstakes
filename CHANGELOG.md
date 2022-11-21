@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [sweepstakes-0.0.33] - 2022-11-21
+### :sparkles: New Features
+- [`ea0f6f5`](https://github.com/kettoleon/sweepstakes/commit/ea0f6f5dd1e9e27ea76969f85deedb86444af8cf) - Showing the last updated time and the next expected time in the leaderboard, but testing it directly in production during a match :crossed_fingers: *(commit by [@kettoleon](https://github.com/kettoleon))*
+
+
 ## [sweepstakes-0.0.32] - 2022-11-21
 ### :bug: Bug Fixes
 - [`a3e90f3`](https://github.com/kettoleon/sweepstakes/commit/a3e90f3a30f6870f1653ffc73c743c48e3a6a141) - Saved the response to the filesystem but forgot to update the in-memory cache :roll_eyes: :facepalm: *(commit by [@kettoleon](https://github.com/kettoleon))*
@@ -76,3 +81,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [sweepstakes-0.0.29]: https://github.com/kettoleon/sweepstakes/compare/sweepstakes-0.0.28...sweepstakes-0.0.29
 [sweepstakes-0.0.31]: https://github.com/kettoleon/sweepstakes/compare/sweepstakes-0.0.30...sweepstakes-0.0.31
 [sweepstakes-0.0.32]: https://github.com/kettoleon/sweepstakes/compare/sweepstakes-0.0.31...sweepstakes-0.0.32
+[sweepstakes-0.0.33]: https://github.com/kettoleon/sweepstakes/compare/sweepstakes-0.0.32...sweepstakes-0.0.33
