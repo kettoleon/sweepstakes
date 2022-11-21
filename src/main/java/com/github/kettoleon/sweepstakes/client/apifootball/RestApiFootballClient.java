@@ -99,6 +99,7 @@ public class RestApiFootballClient implements ApiFootballClient {
                     // Otherwise, during matches, estimated remaining minutes of playtime of the day / remaining requests
                     double remainingLiveMinutesToday = estimateRemainingMinutes();
                     int timeToLiveInMinutes = (int) Math.max(1, Math.ceil(remainingLiveMinutesToday / (maxRequestsPerDay - requestsToday)));
+                    log.info("Checking if we need to update data during a match. Last cache time: {}, TTL: {}min, LiveMinutesLeft: {}min, RequestsLeft: {} ", lastCacheTime, timeToLiveInMinutes, remainingLiveMinutesToday, maxRequestsPerDay - requestsToday);
                     if (LocalDateTime.now().isAfter(lastCacheTime.plusMinutes(timeToLiveInMinutes))) {
                         log.info("Updating fixtures cache during a match. Last cache time: {}, TTL: {}min, LiveMinutesLeft: {}min, RequestsLeft: {}", lastCacheTime, timeToLiveInMinutes, remainingLiveMinutesToday, maxRequestsPerDay - requestsToday);
                         updateInMemoryFixturesCache();
