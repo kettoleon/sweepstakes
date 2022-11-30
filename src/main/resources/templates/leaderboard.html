@@ -53,11 +53,11 @@
             class="bg-gradient"
             th:style="${(entry.getFinishedPosition() == 1)?'background-color:gold;':((entry.getFinishedPosition() == 2)?'background-color:silver;':((entry.getFinishedPosition() == 3)?'background-color:#CD7F32;':''))}"
         >
-            <td class="text-nowrap" th:text="${entry.getPosition()}">1</td>
-            <td class="text-nowrap" th:text="${entry.getUserName()}">UserName</td>
-            <td class="text-nowrap" th:text="${entry.getPoints()}">0</td>
-            <td class="text-nowrap" th:text="${entry.getProgressExactPredictions()}">0</td>
-            <td class="text-nowrap" style="text-align:right;" th:text="${leaderboard.moneyFormat(entry.getPrize())}">0</td>
+            <td class="text-nowrap" th:classappend="${entry.isOutOfChances()?'text-muted font-italic':''}" th:text="${entry.getPosition()}">1</td>
+            <td class="text-nowrap" th:classappend="${entry.isOutOfChances()?'text-muted font-italic':''}" th:text="${entry.getUserName()}">UserName</td>
+            <td class="text-nowrap" th:classappend="${entry.isOutOfChances()?'text-muted font-italic':''}" th:text="${entry.getPoints()}">0</td>
+            <td class="text-nowrap" th:classappend="${entry.isOutOfChances()?'text-muted font-italic':''}" th:text="${entry.getProgressExactPredictions()}">0</td>
+            <td class="text-nowrap" th:classappend="${entry.isOutOfChances()?'text-muted font-italic':''}" style="text-align:right;" th:text="${leaderboard.moneyFormat(entry.getPrize())}">0</td>
         </tr>
 
         </tbody>

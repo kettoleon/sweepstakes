@@ -17,6 +17,8 @@ public class LeaderboardEntry {
 
     private Money prize;
 
+    private boolean outOfChances;
+
     public String getPoints() {
         if (pointsDelta() == 0) {
             return progressPoints + "";

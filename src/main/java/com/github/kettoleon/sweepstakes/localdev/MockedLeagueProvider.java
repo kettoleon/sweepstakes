@@ -27,6 +27,7 @@ public class MockedLeagueProvider implements LeagueProvider {
         scenarios.put("duringFirstMatch", new DuringFirstMatch());
         scenarios.put("afterFirstMatch", new AfterFirstMatch());
         scenarios.put("duringAnotherMatch", new DuringAnotherMatch());
+        scenarios.put("beforeLastMatch", new BeforeLastMatch());
         scenarios.put("afterLastMatch", new AfterLastMatch());
     }
 

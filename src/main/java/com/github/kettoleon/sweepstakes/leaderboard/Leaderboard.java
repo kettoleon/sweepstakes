@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static java.util.Comparator.comparing;
@@ -98,6 +99,14 @@ public class Leaderboard {
         Money tprize = getPrizeThird().divide(thirdPosition.size());
         thirdPosition.forEach(e -> e.setPrize(tprize));
 
+        int thirdPositionPoints = leaderboard.stream().filter(e -> e.getFinishedPosition() == 3).findFirst().map(LeaderboardEntry::getFinishedPoints).orElse(Integer.MAX_VALUE);
+
+        int remainingMatches = (int) league.fixtures.stream().filter(Predicate.not(Fixture::isFinished)).count();
+
+        int thresholdPoints = thirdPositionPoints - remainingMatches * 7;
+        for (LeaderboardEntry e : leaderboard) {
+            e.setOutOfChances(e.getFinishedPoints() < thresholdPoints);
+        }
 
         return leaderboard;
     }
