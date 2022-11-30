@@ -8,6 +8,12 @@ MAVEN_REPO_URL=https://maven.pkg.github.com/kettoleon/sweepstakes/com/github/ket
 # Get latest available version
 rm -f maven-metadata.xml
 wget --user ${GITHUB_USER} --password ${GITHUB_PASS} ${MAVEN_REPO_URL}/maven-metadata.xml
+
+if [ $? -ne 0 ]; then
+  echo "Could not resolve maven metadata!"
+  exit 0;
+fi
+
 LATEST=$(xmlstarlet sel -t -v "//latest" maven-metadata.xml)
 rm -f maven-metadata.xml
 

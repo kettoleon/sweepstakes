@@ -106,13 +106,13 @@ public class RestApiFootballClient implements ApiFootballClient {
     }
 
     public LocalDateTime getNextUpdateTime() {
-        if(aMatchShouldBeInProgress()) {
+        if (aMatchShouldBeInProgress()) {
             double remainingLiveMinutesToday = estimateRemainingMinutes();
             int timeToLiveInMinutes = (int) Math.max(1, Math.ceil(remainingLiveMinutesToday / (maxRequestsPerDay - requestsToday)));
             LocalDateTime nextUpdateTime = lastCacheTime.plusMinutes(timeToLiveInMinutes);
             log.info("Updating fixtures cache during a match. Last cache time: {}, TTL: {}min, LiveMinutesLeft: {}min, RequestsLeft: {}", lastCacheTime, timeToLiveInMinutes, remainingLiveMinutesToday, maxRequestsPerDay - requestsToday);
             return nextUpdateTime;
-        }else{
+        } else {
             return inMemoryFixturesCache.getResponse().stream()
                     .map(FixturesEntry::getTime)
                     .filter(t -> t.isAfter(LocalDateTime.now())).min(Comparator.naturalOrder()).orElse(lastCacheTime.plusDays(1));
@@ -120,18 +120,29 @@ public class RestApiFootballClient implements ApiFootballClient {
     }
 
     private int estimateRemainingMinutes() {
-        int c = 0;
+        boolean[] dayMinutes = new boolean[24 * 60];
+        int currentMinuteOfDay = (int) Duration.between(LocalDateTime.now().truncatedTo(ChronoUnit.DAYS), LocalDateTime.now()).toMinutes();
+
         for (FixturesEntry fe : inMemoryFixturesCache.getResponse()) {
             if (fe.isToday()) {
                 if (!fe.isFinished()) {
-                    c += 120;
-                }
-                if (fe.getFixture().getStatus().isScheduledOrLive()) {
-                    c -= Duration.between(fe.getTime(), LocalDateTime.now()).toMinutes();
+                    int matchStart = (int) Duration.between(LocalDateTime.now().truncatedTo(ChronoUnit.DAYS), fe.getTime()).toMinutes();
+                    int remainingStart = Math.max(currentMinuteOfDay, matchStart);
+                    int estimatedEnd = matchStart + 120;
+                    for (int i = remainingStart; i < estimatedEnd; i++) {
+                        dayMinutes[i] = true;
+                    }
                 }
             }
         }
-        return Math.max(0, c);
+
+        int c = 0;
+        for (boolean min : dayMinutes) {
+            if (min) {
+                c++;
+            }
+        }
+        return c;
     }
 
     private boolean aMatchShouldBeInProgress() {
