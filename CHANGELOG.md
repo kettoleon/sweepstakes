@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [sweepstakes-0.0.36] - 2022-12-02
+### :bug: Bug Fixes
+- [`52470ba`](https://github.com/kettoleon/sweepstakes/commit/52470ba9894408799a1c3dd132111ca464521a2d) - Considering only the fixtures of group phase *(commit by [@kettoleon](https://github.com/kettoleon))*
+
+
 ## [sweepstakes-0.0.35] - 2022-11-30
 ### :sparkles: New Features
 - [`7881071`](https://github.com/kettoleon/sweepstakes/commit/7881071be6fc89c0b5dbd92b13cebca2f3596687) - Showing people mathematically out of the classification in a bootstrap muted style *(commit by [@kettoleon](https://github.com/kettoleon))*
@@ -94,3 +99,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [sweepstakes-0.0.33]: https://github.com/kettoleon/sweepstakes/compare/sweepstakes-0.0.32...sweepstakes-0.0.33
 [sweepstakes-0.0.34]: https://github.com/kettoleon/sweepstakes/compare/sweepstakes-0.0.33...sweepstakes-0.0.34
 [sweepstakes-0.0.35]: https://github.com/kettoleon/sweepstakes/compare/sweepstakes-0.0.34...sweepstakes-0.0.35
+[sweepstakes-0.0.36]: https://github.com/kettoleon/sweepstakes/compare/sweepstakes-0.0.35...sweepstakes-0.0.36
