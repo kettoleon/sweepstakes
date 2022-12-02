@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [sweepstakes-0.0.38] - 2022-12-02
+### :bug: Bug Fixes
+- [`d74b700`](https://github.com/kettoleon/sweepstakes/commit/d74b7009b8b5e934edd8dca996298d68de24eb6e) - Not sure why is not updating... *(commit by [@kettoleon](https://github.com/kettoleon))*
+
+
 ## [sweepstakes-0.0.37] - 2022-12-02
 ### :sparkles: New Features
 - [`20e0bb6`](https://github.com/kettoleon/sweepstakes/commit/20e0bb69c8b4bbc19c86428119b0f92fe91d04a3) - Surprise *(commit by [@kettoleon](https://github.com/kettoleon))*
@@ -106,3 +111,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [sweepstakes-0.0.35]: https://github.com/kettoleon/sweepstakes/compare/sweepstakes-0.0.34...sweepstakes-0.0.35
 [sweepstakes-0.0.36]: https://github.com/kettoleon/sweepstakes/compare/sweepstakes-0.0.35...sweepstakes-0.0.36
 [sweepstakes-0.0.37]: https://github.com/kettoleon/sweepstakes/compare/sweepstakes-0.0.36...sweepstakes-0.0.37
+[sweepstakes-0.0.38]: https://github.com/kettoleon/sweepstakes/compare/sweepstakes-0.0.37...sweepstakes-0.0.38
