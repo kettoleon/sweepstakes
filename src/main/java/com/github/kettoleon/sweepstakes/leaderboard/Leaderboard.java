@@ -221,6 +221,15 @@ public class Leaderboard {
         return false;
     }
 
+    public boolean areAllFixturesFinished() {
+        for (Fixture fixture : league.getFixtures()) {
+            if (!fixture.isFinished()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public boolean isAnyFixtureStarted() {
         for (Fixture fixture : league.getFixtures()) {
             if (fixture.isStarted()) {

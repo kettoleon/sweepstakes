@@ -6,10 +6,7 @@ import com.github.kettoleon.sweepstakes.league.model.League;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Comparator;
-import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 public class AfterLastMatch implements Scenario {
 
@@ -20,7 +17,7 @@ public class AfterLastMatch implements Scenario {
 
 
         LocalDateTime leagueEnd = league.getEnd();
-        if (leagueEnd.truncatedTo(ChronoUnit.DAYS).isAfter(LocalDateTime.now().truncatedTo(ChronoUnit.DAYS))) {
+        if (leagueEnd.truncatedTo(ChronoUnit.DAYS).isAfter(LocalDateTime.now().minusDays(1).truncatedTo(ChronoUnit.DAYS))) {
             if (cache != null) return cache;
             long days = Duration.between(LocalDateTime.now().truncatedTo(ChronoUnit.DAYS), leagueEnd.truncatedTo(ChronoUnit.DAYS)).toDays() + 1;
 

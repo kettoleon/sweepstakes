@@ -1,3 +1,5 @@
+<script th:if="${leaderboard.areAllFixturesFinished()}">startConfetti();</script>
+
 <div th:if="${league.isBeforeStart()}">
     <p>The leaderboard will be enabled during the first match of the season. It will show everyone's points and
         positions as the league progresses. It will automatically update itself live during a match.</p>
