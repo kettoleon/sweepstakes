@@ -45,6 +45,10 @@ public class FixturesEntry {
         return league.getRound();
     }
 
+    public boolean isGroupStage(){
+        return league.getRound().contains("Group Stage");
+    }
+
     public boolean isFinished() {
         return fixture.getStatus().isFinished();
     }

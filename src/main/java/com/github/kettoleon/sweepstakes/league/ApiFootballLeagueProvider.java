@@ -37,7 +37,7 @@ public class ApiFootballLeagueProvider implements LeagueProvider {
 
     private List<Fixture> collectFixtures() {
         List<Fixture> fixtures = new ArrayList<>();
-        client.getFixtures().getResponse().forEach(ft -> fixtures.add(mapFixture(ft)));
+        client.getFixtures().getResponse().stream().filter(FixturesEntry::isGroupStage).forEach(ft -> fixtures.add(mapFixture(ft)));
 
         return fixtures;
     }
