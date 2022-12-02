@@ -88,7 +88,7 @@ public class RestApiFootballClient implements ApiFootballClient {
 
     private void updateInMemoryFixturesCacheIfNeeded() {
         try {
-            if (LocalDateTime.now().isBefore(cachedLeague.getSeasonStart()) || LocalDateTime.now().isAfter(cachedLeague.getSeasonEnd())) {
+            if (LocalDateTime.now().isBefore(cachedLeague.getSeasonStart()) || LocalDateTime.now().isAfter(cachedLeague.getSeasonEnd().plusDays(1))) {
                 // Updating cache once a day before the league starts or ends
                 if (LocalDateTime.now().isAfter(lastCacheTime.plusDays(1).truncatedTo(ChronoUnit.DAYS))) {
                     log.info("Updating fixtures cache once a day. Last cache time: {}", lastCacheTime);
@@ -110,7 +110,7 @@ public class RestApiFootballClient implements ApiFootballClient {
             double remainingLiveMinutesToday = estimateRemainingMinutes();
             int timeToLiveInMinutes = (int) Math.max(1, Math.ceil(remainingLiveMinutesToday / (maxRequestsPerDay - requestsToday)));
             LocalDateTime nextUpdateTime = lastCacheTime.plusMinutes(timeToLiveInMinutes);
-            log.info("Updating fixtures cache during a match. Last cache time: {}, TTL: {}min, LiveMinutesLeft: {}min, RequestsLeft: {}", lastCacheTime, timeToLiveInMinutes, remainingLiveMinutesToday, maxRequestsPerDay - requestsToday);
+            log.info("Updating fixtures cache during a match. Last cache time: {}, TTL: {}min, LiveMinutesLeft: {}min, RequestsLeft: {}, NextUpdate: {}", lastCacheTime, timeToLiveInMinutes, remainingLiveMinutesToday, maxRequestsPerDay - requestsToday, nextUpdateTime);
             return nextUpdateTime;
         } else {
             return inMemoryFixturesCache.getResponse().stream()
