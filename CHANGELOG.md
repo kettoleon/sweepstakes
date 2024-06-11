@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [sweepstakes-0.0.39] - 2024-06-11
+### :sparkles: New Features
+- [`8fe61c5`](https://github.com/kettoleon/sweepstakes/commit/8fe61c5f4be3ff9114ace6869b62cc4b82da6aee) - Updating for the euro championship 2024 *(commit by [@kettoleon](https://github.com/kettoleon))*
+- [`9d8ade4`](https://github.com/kettoleon/sweepstakes/commit/9d8ade4f4f04e78626032eb63ce26f83f312e958) - Updating for the euro championship 2024 *(commit by [@kettoleon](https://github.com/kettoleon))*
+
+
 ## [sweepstakes-0.0.38] - 2022-12-02
 ### :bug: Bug Fixes
 - [`d74b700`](https://github.com/kettoleon/sweepstakes/commit/d74b7009b8b5e934edd8dca996298d68de24eb6e) - Not sure why is not updating... *(commit by [@kettoleon](https://github.com/kettoleon))*
@@ -112,3 +118,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [sweepstakes-0.0.36]: https://github.com/kettoleon/sweepstakes/compare/sweepstakes-0.0.35...sweepstakes-0.0.36
 [sweepstakes-0.0.37]: https://github.com/kettoleon/sweepstakes/compare/sweepstakes-0.0.36...sweepstakes-0.0.37
 [sweepstakes-0.0.38]: https://github.com/kettoleon/sweepstakes/compare/sweepstakes-0.0.37...sweepstakes-0.0.38
+[sweepstakes-0.0.39]: https://github.com/kettoleon/sweepstakes/compare/sweepstakes-0.0.38...sweepstakes-0.0.39
