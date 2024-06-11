@@ -98,7 +98,7 @@
         >
             <thead>
             <tr class="text-nowrap text-center bg-dark text-light">
-                <th colspan="18" th:text="${group.getName()}">Nov 20</th>
+                <th th:colspan="${group.getFixtures().size()*4+2}" th:text="${group.getName()}">Nov 20</th>
             </tr>
             <tr>
                 <th></th>
@@ -197,7 +197,7 @@
     >
         <thead>
         <tr class="text-nowrap text-center bg-dark text-light">
-            <th colspan="18">Totals</th>
+            <th th:colspan="${groups.size()+2}">Totals</th>
         </tr>
         <tr>
             <th class="text-nowrap">Name</th>

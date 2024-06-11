@@ -1,7 +1,6 @@
 package com.github.kettoleon.sweepstakes;
 
 import com.github.kettoleon.sweepstakes.client.apifootball.RestApiFootballClient;
-import com.github.kettoleon.sweepstakes.localdev.MockedApiFootballClient;
 import com.github.kettoleon.sweepstakes.league.ApiFootballLeagueProvider;
 import com.github.kettoleon.sweepstakes.league.LeagueProvider;
 import org.springframework.boot.SpringApplication;
@@ -34,7 +33,7 @@ public class Sweepstakes {
     public RestApiFootballClient restApiFootballClient(Environment environment) {
         String rapidApiHost = environment.getProperty("rapidapi.host", "api-football-v1.p.rapidapi.com");
         String rapidApiKey = environment.getRequiredProperty("rapidapi.key");
-        return new RestApiFootballClient(1, 2022, rapidApiHost, rapidApiKey);
+        return new RestApiFootballClient(4, 2024, rapidApiHost, rapidApiKey);
     }
 
 }

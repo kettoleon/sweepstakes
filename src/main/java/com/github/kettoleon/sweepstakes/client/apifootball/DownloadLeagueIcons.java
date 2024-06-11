@@ -16,17 +16,17 @@ import java.nio.channels.ReadableByteChannel;
 public class DownloadLeagueIcons {
 
     public static void main(String[] args) {
-        ApiFootballClient apiFootballClient = new MockedApiFootballClient(1, 2022);
+        ApiFootballClient apiFootballClient = new MockedApiFootballClient(4, 2024);
         CountriesResponse countries = apiFootballClient.getCountries();
         FixturesResponse fixtures = apiFootballClient.getFixtures();
         fixtures.getResponse().forEach(fe -> {
             downloadLogoIfNeeded("teams", fe.getTeams().getHome().getLogo());
             downloadLogoIfNeeded("teams", fe.getTeams().getAway().getLogo());
             countries.getCountry(fe.getTeams().getHome().getName()).map(Country::getFlag).ifPresentOrElse(DownloadLeagueIcons::downloadCountryFlagIfNeeded, () -> {
-                throw new RuntimeException("Could not match " + fe.getTeams().getHome().getName());
+                System.err.println("Could not match " + fe.getTeams().getHome().getName());
             });
             countries.getCountry(fe.getTeams().getAway().getName()).map(Country::getFlag).ifPresentOrElse(DownloadLeagueIcons::downloadCountryFlagIfNeeded, () -> {
-                throw new RuntimeException("Could not match " + fe.getTeams().getAway().getName());
+                System.err.println("Could not match " + fe.getTeams().getAway().getName());
             });
         });
         downloadLogoIfNeeded("leagues", apiFootballClient.getLeague().getResponse().get(0).getLeague().getLogo());

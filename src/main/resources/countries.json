@@ -2,7 +2,7 @@
   "get": "teams/countries",
   "parameters": [],
   "errors": [],
-  "results": 248,
+  "results": 246,
   "paging": {
     "current": 1,
     "total": 1
@@ -49,7 +49,7 @@
       "flag": null
     },
     {
-      "name": "Antigua and Barbuda",
+      "name": "Antigua-and-Barbuda",
       "code": null,
       "flag": null
     },
@@ -154,7 +154,7 @@
       "flag": "https://media.api-sports.io/flags/ba.svg"
     },
     {
-      "name": "Bosnia and Herzegovina",
+      "name": "Bosnia-and-Herzegovina",
       "code": null,
       "flag": null
     },
@@ -169,7 +169,7 @@
       "flag": "https://media.api-sports.io/flags/br.svg"
     },
     {
-      "name": "British Virgin Islands",
+      "name": "British-Virgin-Islands",
       "code": null,
       "flag": null
     },
@@ -187,11 +187,6 @@
       "name": "Bulgaria",
       "code": "BG",
       "flag": "https://media.api-sports.io/flags/bg.svg"
-    },
-    {
-      "name": "Burkina Faso",
-      "code": null,
-      "flag": null
     },
     {
       "name": "Burkina-Faso",
@@ -224,12 +219,17 @@
       "flag": null
     },
     {
-      "name": "Cayman Islands",
+      "name": "Caracas",
       "code": null,
       "flag": null
     },
     {
-      "name": "Central African Republic",
+      "name": "Cayman-Islands",
+      "code": null,
+      "flag": null
+    },
+    {
+      "name": "Central-African-Republic",
       "code": null,
       "flag": null
     },
@@ -269,19 +269,9 @@
       "flag": "https://media.api-sports.io/flags/cd.svg"
     },
     {
-      "name": "Congo DR",
-      "code": null,
-      "flag": null
-    },
-    {
       "name": "Congo-DR",
       "code": "CG",
       "flag": "https://media.api-sports.io/flags/cg.svg"
-    },
-    {
-      "name": "Cook Islands",
-      "code": null,
-      "flag": null
     },
     {
       "name": "Cook-Islands",
@@ -292,11 +282,6 @@
       "name": "Costa-Rica",
       "code": "CR",
       "flag": "https://media.api-sports.io/flags/cr.svg"
-    },
-    {
-      "name": "Côte d'Ivoire",
-      "code": null,
-      "flag": null
     },
     {
       "name": "Crimea",
@@ -314,7 +299,7 @@
       "flag": "https://media.api-sports.io/flags/cu.svg"
     },
     {
-      "name": "Curaçao",
+      "name": "Cura\u00e7ao",
       "code": null,
       "flag": null
     },
@@ -322,11 +307,6 @@
       "name": "Cyprus",
       "code": "CY",
       "flag": "https://media.api-sports.io/flags/cy.svg"
-    },
-    {
-      "name": "Czech Republic",
-      "code": null,
-      "flag": null
     },
     {
       "name": "Czech-Republic",
@@ -359,7 +339,7 @@
       "flag": "https://media.api-sports.io/flags/do.svg"
     },
     {
-      "name": "East Timor",
+      "name": "East-Timor",
       "code": null,
       "flag": null
     },
@@ -384,7 +364,7 @@
       "flag": "https://media.api-sports.io/flags/gb.svg"
     },
     {
-      "name": "Equatorial Guinea",
+      "name": "Equatorial-Guinea",
       "code": null,
       "flag": null
     },
@@ -407,11 +387,6 @@
       "name": "Ethiopia",
       "code": "ET",
       "flag": "https://media.api-sports.io/flags/et.svg"
-    },
-    {
-      "name": "Eurocups",
-      "code": null,
-      "flag": null
     },
     {
       "name": "Faroe-Islands",
@@ -440,8 +415,8 @@
     },
     {
       "name": "Gabon",
-      "code": null,
-      "flag": null
+      "code": "GA",
+      "flag": "https://media.api-sports.io/flags/ga.svg"
     },
     {
       "name": "Gambia",
@@ -475,8 +450,8 @@
     },
     {
       "name": "Grenada",
-      "code": null,
-      "flag": null
+      "code": "GD",
+      "flag": "https://media.api-sports.io/flags/gd.svg"
     },
     {
       "name": "Guadeloupe",
@@ -522,11 +497,6 @@
       "name": "Honduras",
       "code": "HN",
       "flag": "https://media.api-sports.io/flags/hn.svg"
-    },
-    {
-      "name": "Hong Kong",
-      "code": null,
-      "flag": null
     },
     {
       "name": "Hong-Kong",
@@ -584,11 +554,6 @@
       "flag": "https://media.api-sports.io/flags/it.svg"
     },
     {
-      "name": "Ivory Coast",
-      "code": null,
-      "flag": null
-    },
-    {
       "name": "Ivory-Coast",
       "code": "CI",
       "flag": "https://media.api-sports.io/flags/ci.svg"
@@ -624,6 +589,11 @@
       "flag": null
     },
     {
+      "name": "Korea Republic",
+      "code": null,
+      "flag": null
+    },
+    {
       "name": "Korea-Republic",
       "code": null,
       "flag": null
@@ -637,6 +607,11 @@
       "name": "Kuwait",
       "code": "KW",
       "flag": "https://media.api-sports.io/flags/kw.svg"
+    },
+    {
+      "name": "Kyrgyz-Republic",
+      "code": null,
+      "flag": null
     },
     {
       "name": "Kyrgyzstan",
@@ -660,8 +635,8 @@
     },
     {
       "name": "Lesotho",
-      "code": null,
-      "flag": null
+      "code": "LS",
+      "flag": "https://media.api-sports.io/flags/ls.svg"
     },
     {
       "name": "Liberia",
@@ -695,6 +670,11 @@
     },
     {
       "name": "Macao",
+      "code": "MO",
+      "flag": "https://media.api-sports.io/flags/mo.svg"
+    },
+    {
+      "name": "Macau",
       "code": null,
       "flag": null
     },
@@ -759,6 +739,11 @@
       "flag": "https://media.api-sports.io/flags/md.svg"
     },
     {
+      "name": "Monaco",
+      "code": null,
+      "flag": null
+    },
+    {
       "name": "Mongolia",
       "code": "MN",
       "flag": "https://media.api-sports.io/flags/mn.svg"
@@ -767,6 +752,11 @@
       "name": "Montenegro",
       "code": "ME",
       "flag": "https://media.api-sports.io/flags/me.svg"
+    },
+    {
+      "name": "Montserrat",
+      "code": null,
+      "flag": null
     },
     {
       "name": "Morocco",
@@ -799,12 +789,17 @@
       "flag": "https://media.api-sports.io/flags/nl.svg"
     },
     {
-      "name": "Netherlands Antilles",
+      "name": "Netherlands-Antilles",
       "code": null,
       "flag": null
     },
     {
-      "name": "New Caledonia",
+      "name": "New Zealand",
+      "code": null,
+      "flag": null
+    },
+    {
+      "name": "New-Caledonia",
       "code": null,
       "flag": null
     },
@@ -829,17 +824,12 @@
       "flag": "https://media.api-sports.io/flags/ng.svg"
     },
     {
-      "name": "North Macedonia",
-      "code": null,
-      "flag": null
-    },
-    {
       "name": "North-Korea",
       "code": null,
       "flag": null
     },
     {
-      "name": "Northern Mariana Islands",
+      "name": "North-Macedonia",
       "code": null,
       "flag": null
     },
@@ -847,6 +837,11 @@
       "name": "Northern-Ireland",
       "code": "GB",
       "flag": "https://media.api-sports.io/flags/gb.svg"
+    },
+    {
+      "name": "Northern-Mariana-Islands",
+      "code": null,
+      "flag": null
     },
     {
       "name": "Norway",
@@ -872,11 +867,6 @@
       "name": "Panama",
       "code": "PA",
       "flag": "https://media.api-sports.io/flags/pa.svg"
-    },
-    {
-      "name": "Papua New Guinea",
-      "code": null,
-      "flag": null
     },
     {
       "name": "Papua-New-Guinea",
@@ -919,7 +909,7 @@
       "flag": "https://media.api-sports.io/flags/qa.svg"
     },
     {
-      "name": "Réunion",
+      "name": "Reunion",
       "code": null,
       "flag": null
     },
@@ -939,7 +929,22 @@
       "flag": "https://media.api-sports.io/flags/rw.svg"
     },
     {
-      "name": "Saint Martin",
+      "name": "Saint-Kitts-and-Nevis",
+      "code": null,
+      "flag": null
+    },
+    {
+      "name": "Saint-Lucia",
+      "code": null,
+      "flag": null
+    },
+    {
+      "name": "Saint-Martin",
+      "code": null,
+      "flag": null
+    },
+    {
+      "name": "Saint-Vincent-and-the-Grenadin",
       "code": null,
       "flag": null
     },
@@ -954,7 +959,7 @@
       "flag": "https://media.api-sports.io/flags/sm.svg"
     },
     {
-      "name": "São Tomé e Príncipe",
+      "name": "S\u00e3o-Tom\u00e9-e-Pr\u00edncipe",
       "code": null,
       "flag": null
     },
@@ -984,7 +989,7 @@
       "flag": null
     },
     {
-      "name": "Sierra Leone",
+      "name": "Sierra-Leone",
       "code": null,
       "flag": null
     },
@@ -994,7 +999,7 @@
       "flag": "https://media.api-sports.io/flags/sg.svg"
     },
     {
-      "name": "Sint Maarten",
+      "name": "Sint-Maarten",
       "code": null,
       "flag": null
     },
@@ -1007,11 +1012,6 @@
       "name": "Slovenia",
       "code": "SI",
       "flag": "https://media.api-sports.io/flags/si.svg"
-    },
-    {
-      "name": "Solomon Islands",
-      "code": null,
-      "flag": null
     },
     {
       "name": "Solomon-Islands",
@@ -1049,22 +1049,7 @@
       "flag": "https://media.api-sports.io/flags/es.svg"
     },
     {
-      "name": "Sri Lanka",
-      "code": null,
-      "flag": null
-    },
-    {
-      "name": "St. Kitts and Nevis",
-      "code": null,
-      "flag": null
-    },
-    {
-      "name": "St. Lucia",
-      "code": null,
-      "flag": null
-    },
-    {
-      "name": "St. Vincent and the Grenadines",
+      "name": "Sri-Lanka",
       "code": null,
       "flag": null
     },
@@ -1125,16 +1110,11 @@
     },
     {
       "name": "Togo",
-      "code": null,
-      "flag": null
+      "code": "TG",
+      "flag": "https://media.api-sports.io/flags/tg.svg"
     },
     {
       "name": "Tonga",
-      "code": null,
-      "flag": null
-    },
-    {
-      "name": "Trinidad and Tobago",
       "code": null,
       "flag": null
     },
@@ -1154,6 +1134,11 @@
       "flag": "https://media.api-sports.io/flags/tr.svg"
     },
     {
+      "name": "T\u00fcrkiye",
+      "code": null,
+      "flag": null
+    },
+    {
       "name": "Turkmenistan",
       "code": "TM",
       "flag": "https://media.api-sports.io/flags/tm.svg"
@@ -1164,7 +1149,7 @@
       "flag": null
     },
     {
-      "name": "UAE",
+      "name": "Turks-and-Caicos-Islands",
       "code": null,
       "flag": null
     },
@@ -1179,11 +1164,6 @@
       "flag": "https://media.api-sports.io/flags/ua.svg"
     },
     {
-      "name": "United Arab Emirates",
-      "code": null,
-      "flag": null
-    },
-    {
       "name": "United-Arab-Emirates",
       "code": "AE",
       "flag": "https://media.api-sports.io/flags/ae.svg"
@@ -1194,7 +1174,7 @@
       "flag": "https://media.api-sports.io/flags/uy.svg"
     },
     {
-      "name": "US Virgin Islands",
+      "name": "US-Virgin-Islands",
       "code": null,
       "flag": null
     },
@@ -1225,13 +1205,23 @@
     },
     {
       "name": "Wales",
-      "code": "WL",
-      "flag": "https://media.api-sports.io/flags/wl.svg"
+      "code": "GB",
+      "flag": "https://media.api-sports.io/flags/gb.svg"
+    },
+    {
+      "name": "World",
+      "code": "",
+      "flag": "https://media.api-sports.io/flags/.svg"
+    },
+    {
+      "name": "WorldCup",
+      "code": null,
+      "flag": null
     },
     {
       "name": "Yemen",
-      "code": null,
-      "flag": null
+      "code": "YE",
+      "flag": "https://media.api-sports.io/flags/ye.svg"
     },
     {
       "name": "Zambia",

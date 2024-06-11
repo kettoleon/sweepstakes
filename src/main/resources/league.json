@@ -1,8 +1,8 @@
 {
   "get": "leagues",
   "parameters": {
-    "id": "1",
-    "season": "2022"
+    "id": "4",
+    "season": "2024"
   },
   "errors": [],
   "results": 1,
@@ -13,10 +13,10 @@
   "response": [
     {
       "league": {
-        "id": 1,
-        "name": "World Cup",
+        "id": 4,
+        "name": "Euro Championship",
         "type": "Cup",
-        "logo": "https://media.api-sports.io/football/leagues/1.png"
+        "logo": "https://media.api-sports.io/football/leagues/4.png"
       },
       "country": {
         "name": "World",
@@ -25,9 +25,9 @@
       },
       "seasons": [
         {
-          "year": 2022,
-          "start": "2022-11-20",
-          "end": "2022-12-02",
+          "year": 2024,
+          "start": "2024-06-14",
+          "end": "2024-06-26",
           "current": true,
           "coverage": {
             "fixtures": {
@@ -37,13 +37,13 @@
               "statistics_players": false
             },
             "standings": true,
-            "players": false,
-            "top_scorers": false,
-            "top_assists": false,
-            "top_cards": false,
+            "players": true,
+            "top_scorers": true,
+            "top_assists": true,
+            "top_cards": true,
             "injuries": false,
             "predictions": true,
-            "odds": false
+            "odds": true
           }
         }
       ]
