@@ -5,7 +5,6 @@ import com.github.javafaker.Name;
 import com.github.kettoleon.sweepstakes.bet.repo.BetsRepository;
 import com.github.kettoleon.sweepstakes.bet.repo.FixtureBet;
 import com.github.kettoleon.sweepstakes.league.model.Fixture;
-import com.github.kettoleon.sweepstakes.league.LeagueProvider;
 import com.github.kettoleon.sweepstakes.users.repo.User;
 import com.github.kettoleon.sweepstakes.users.repo.UserRepository;
 import org.slf4j.Logger;
@@ -44,7 +43,7 @@ public class LocalDevelopmentConfiguration {
     @Bean
     @Primary
     public MockedLeagueProvider mockedLeagueProvider() {
-        return new MockedLeagueProvider("before", new MockedApiFootballClient(1, 2022));
+        return new MockedLeagueProvider("before", new MockedApiFootballClient(4, 2024));
     }
 
     @EventListener(ApplicationReadyEvent.class)
