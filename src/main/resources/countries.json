@@ -970,8 +970,8 @@
     },
     {
       "name": "Scotland",
-      "code": "GB",
-      "flag": "https://media.api-sports.io/flags/gb.svg"
+      "code": "GB-SCT",
+      "flag": "https://media.api-sports.io/flags/gb-sct.svg"
     },
     {
       "name": "Senegal",
