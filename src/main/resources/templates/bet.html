@@ -1,4 +1,4 @@
-<div th:if="${!league.isBeforeStart()}" class="alert alert-info d-flex align-items-center" role="alert">
+<div th:if="${league.areBetsClosed()}" class="alert alert-info d-flex align-items-center" role="alert">
     <div class="flex-shrink-0 me-2"><i class="bi bi-train-front text-info"></i></div>
     <div>
         Sorry, the time to register and place your bet has passed, and this train has left the station. Check your
@@ -6,7 +6,7 @@
     </div>
 </div>
 
-<div th:if="${league.isBeforeStart()}">
+<div th:if="${!league.areBetsClosed()}">
 
     <div th:if="${!user.isPaid()}" class="alert alert-danger d-flex align-items-center" role="alert">
         <div class="flex-shrink-0 me-2"><i class="bi bi-send-exclamation-fill text-danger"></i></div>
@@ -25,7 +25,7 @@
     <div th:if="${form.areAllBetsPlaced()}" class="alert alert-success d-flex align-items-center" role="alert">
         <div class="flex-shrink-0 me-2"><i class="bi bi-database-fill-check text-success"></i></div>
         <div>
-            All bets are set, remember you have until <span th:text="${league.getFormattedStart()}">the day before the first match</span> to make any modifications.
+            All bets are set, remember you have until <span th:text="${league.getFormattedBetClosingTime()}">the day before the first match</span> to make any modifications.
         </div>
     </div>
 

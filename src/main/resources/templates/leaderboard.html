@@ -1,9 +1,9 @@
 <script th:if="${leaderboard.areAllFixturesFinished()}">startConfetti();</script>
 
-<div th:if="${league.isBeforeStart()}">
+<div th:if="${!league.areBetsClosed()}">
     <p>The leaderboard will be enabled during the first match of the season. It will show everyone's points and
         positions as the league progresses. It will automatically update itself live during a match.</p>
-    <p>After the bet form is closed at <span th:text="${league.getFormattedStart()}"></span> and before the first match
+    <p>After the bet form is closed at <span th:text="${league.getFormattedBetClosingTime()}"></span> and before the first match
         at <span th:text="${league.formatTime(league.getFirstMatchTime())}"></span>, we will print a copy of
         <a href="bets">everyone's bets</a> and send it to everyone by e-mail.</p>
     <p>In the meantime, make sure you have <a href="bet">placed your bet</a> and sent <strong>5€</strong> to <span
@@ -11,7 +11,7 @@
     <div class="text-center"><i style="font-size: 5em;color: burlywood;" class="bi-calendar-heart text-center"></i>
     </div>
 </div>
-<div th:if="${!league.isBeforeStart() && !league.hasFirstMatchStarted()}">
+<div th:if="${league.areBetsClosed() && !league.hasFirstMatchStarted()}">
     <p>The leaderboard will be enabled during the first match of the season. It will show everyone's points and
         positions as the league progresses. It will automatically update itself live during a match.</p>
     <p>You can now check <a href="bets">everyone's bets</a> and print them into a pdf, if you haven't received the

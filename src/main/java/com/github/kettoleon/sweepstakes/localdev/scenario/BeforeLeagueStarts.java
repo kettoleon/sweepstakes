@@ -5,19 +5,19 @@ import com.github.kettoleon.sweepstakes.league.model.League;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 
 public class BeforeLeagueStarts implements Scenario {
     @Override
     public League alterLeague(League league) {
 
 
-        LocalDateTime leagueStart = league.getStart();
-        if (leagueStart.truncatedTo(ChronoUnit.DAYS).isBefore(LocalDateTime.now().truncatedTo(ChronoUnit.DAYS))) {
-            long days = Duration.between(leagueStart, LocalDateTime.now().plusDays(1).truncatedTo(ChronoUnit.DAYS)).toDays();
+        LocalDateTime firstMatchTime = league.getFirstMatchTime();
+        if (LocalDateTime.now().isBefore(firstMatchTime)) {
+            long minutes = Duration.between(LocalDateTime.now(), firstMatchTime).toMinutes();
 
             for (Fixture fixture : league.getFixtures()) {
-                fixture.setTime(fixture.getTime().plusDays(days));
+                fixture.setTime(fixture.getTime().minusMinutes(minutes-90));
+
                 fixture.setStarted(false);
                 fixture.setFinished(false);
             }

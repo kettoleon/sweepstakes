@@ -1,7 +1,7 @@
-<div th:if="${!league.isBeforeStart()}">
+<div th:if="${league.areBetsClosed()}">
     <p>Sorry, the time to register and place your bet has passed, and this train has left the station.</p>
 </div>
-<div th:if="${league.isBeforeStart()}">
+<div th:if="${!league.areBetsClosed()}">
     <div class="row justify-content-center">
         <div class="col-sm-5">
             <div th:if="${!success}">

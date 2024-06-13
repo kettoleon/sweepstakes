@@ -1,9 +1,9 @@
 <div th:if="${page.equals('bets')}" class="row">
 
-    <div th:if="${league.isBeforeStart()}">
+    <div th:if="${!league.areBetsClosed()}">
         <p>Here are the bets that people are placing. The form is still open so this data will be changing.</p>
     </div>
-    <div th:if="${!league.isBeforeStart()}">
+    <div th:if="${league.areBetsClosed()}">
         <p>Here is a copy of everyone's bets to keep track of.</p>
         <div class="text-center d-print-none">
             <a class="btn btn-primary" href="register" role="button"

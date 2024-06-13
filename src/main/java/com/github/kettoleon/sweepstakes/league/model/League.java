@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.time.chrono.ChronoLocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -71,5 +70,18 @@ public class League {
     public LocalDateTime getFirstMatchTime() {
         return getFixturesByDate().get(0).getTime();
     }
+
+    public LocalDateTime getBetClosingTime() {
+        return getFixturesByDate().get(0).getTime().minusHours(1);
+    }
+
+    public String getFormattedBetClosingTime() {
+        return formatTime(getBetClosingTime());
+    }
+
+    public boolean areBetsClosed() {
+        return LocalDateTime.now().isAfter(getBetClosingTime());
+    }
+
 
 }
