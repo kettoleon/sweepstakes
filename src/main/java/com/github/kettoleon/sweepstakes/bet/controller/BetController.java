@@ -92,7 +92,7 @@ public class BetController {
 
     @PostMapping("/bet")
     public ModelAndView saveBets(@ModelAttribute("form") BetsForm form, Errors errors, Authentication auth) {
-        if (!leagueProvider.getLeague().isBeforeStart()) {
+        if (leagueProvider.getLeague().areBetsClosed()) {
             return page("bet", "Manage my Bet");
         }
 

@@ -59,7 +59,7 @@ public class UserController {
             Errors errors
     ) {
 
-        if (!leagueProvider.getLeague().isBeforeStart()) {
+        if (leagueProvider.getLeague().areBetsClosed()) {
             return page("register", "Registration Form");
         }
         try {
