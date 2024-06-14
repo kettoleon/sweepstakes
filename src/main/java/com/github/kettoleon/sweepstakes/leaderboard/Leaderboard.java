@@ -88,16 +88,22 @@ public class Leaderboard {
         }
 
         List<LeaderboardEntry> firstPosition = leaderboard.stream().filter(e -> e.getProgressPosition() == 1).collect(toList());
-        Money fprize = getPrizeFirst().divide(firstPosition.size());
-        firstPosition.forEach(e -> e.setPrize(fprize));
+        if(!firstPosition.isEmpty()) {
+            Money fprize = getPrizeFirst().divide(firstPosition.size());
+            firstPosition.forEach(e -> e.setPrize(fprize));
+        }
 
         List<LeaderboardEntry> secondPosition = leaderboard.stream().filter(e -> e.getProgressPosition() == 2).collect(toList());
-        Money sprize = getPrizeSecond().divide(secondPosition.size());
-        secondPosition.forEach(e -> e.setPrize(sprize));
+        if(!secondPosition.isEmpty()) {
+            Money sprize = getPrizeSecond().divide(secondPosition.size());
+            secondPosition.forEach(e -> e.setPrize(sprize));
+        }
 
         List<LeaderboardEntry> thirdPosition = leaderboard.stream().filter(e -> e.getProgressPosition() == 3).collect(toList());
-        Money tprize = getPrizeThird().divide(thirdPosition.size());
-        thirdPosition.forEach(e -> e.setPrize(tprize));
+        if(!thirdPosition.isEmpty()) {
+            Money tprize = getPrizeThird().divide(thirdPosition.size());
+            thirdPosition.forEach(e -> e.setPrize(tprize));
+        }
 
         int thirdPositionPoints = leaderboard.stream().filter(e -> e.getFinishedPosition() == 3).findFirst().map(LeaderboardEntry::getFinishedPoints).orElse(Integer.MAX_VALUE);
 
