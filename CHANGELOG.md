@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [sweepstakes-0.0.44] - 2024-06-14
+### :bug: Bug Fixes
+- [`3507343`](https://github.com/kettoleon/sweepstakes/commit/3507343c2742deb8d7124cebb38bc2f3474c551a) - Fixing leaderboard bug after first match start *(commit by [@kettoleon](https://github.com/kettoleon))*
+
+
 ## [sweepstakes-0.0.43] - 2024-06-14
 ### :bug: Bug Fixes
 - [`5022c53`](https://github.com/kettoleon/sweepstakes/commit/5022c530ad83726f524855095448086a680307ef) - Fixed bugs during same day of first match *(commit by [@kettoleon](https://github.com/kettoleon))*
@@ -137,3 +142,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [sweepstakes-0.0.41]: https://github.com/kettoleon/sweepstakes/compare/sweepstakes-0.0.40...sweepstakes-0.0.41
 [sweepstakes-0.0.42]: https://github.com/kettoleon/sweepstakes/compare/sweepstakes-0.0.41...sweepstakes-0.0.42
 [sweepstakes-0.0.43]: https://github.com/kettoleon/sweepstakes/compare/sweepstakes-0.0.42...sweepstakes-0.0.43
+[sweepstakes-0.0.44]: https://github.com/kettoleon/sweepstakes/compare/sweepstakes-0.0.43...sweepstakes-0.0.44
