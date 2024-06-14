@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [sweepstakes-0.0.43] - 2024-06-14
+### :bug: Bug Fixes
+- [`5022c53`](https://github.com/kettoleon/sweepstakes/commit/5022c530ad83726f524855095448086a680307ef) - Fixed bugs during same day of first match *(commit by [@kettoleon](https://github.com/kettoleon))*
+
+
 ## [sweepstakes-0.0.42] - 2024-06-13
 ### :sparkles: New Features
 - [`d611357`](https://github.com/kettoleon/sweepstakes/commit/d6113574f9a4c15adcf2b6026f8aa6af7a7ecfeb) - Bet closing time to be one hour before the first match *(commit by [@enr02](https://github.com/enr02))*
@@ -131,3 +136,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [sweepstakes-0.0.39]: https://github.com/kettoleon/sweepstakes/compare/sweepstakes-0.0.38...sweepstakes-0.0.39
 [sweepstakes-0.0.41]: https://github.com/kettoleon/sweepstakes/compare/sweepstakes-0.0.40...sweepstakes-0.0.41
 [sweepstakes-0.0.42]: https://github.com/kettoleon/sweepstakes/compare/sweepstakes-0.0.41...sweepstakes-0.0.42
+[sweepstakes-0.0.43]: https://github.com/kettoleon/sweepstakes/compare/sweepstakes-0.0.42...sweepstakes-0.0.43
