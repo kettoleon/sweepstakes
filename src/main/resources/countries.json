@@ -1134,6 +1134,11 @@
       "flag": "https://media.api-sports.io/flags/tr.svg"
     },
     {
+      "name": "Türkiye",
+      "code": "TR",
+      "flag": "https://media.api-sports.io/flags/tr.svg"
+    },
+    {
       "name": "T\u00fcrkiye",
       "code": null,
       "flag": null
